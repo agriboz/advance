@@ -32,7 +32,7 @@ module.exports = {
         ? 'http://10.10.27.36:8181'
         : 'http://localhost:3000',
     browserBaseURL:
-      'api/advance/v1' /* ,
+      'api/adv/v1' /* ,
     errorHandler (errorReason, { error }) {
       Vue.prototype.$toast.open({
         type: 'is-danger',
