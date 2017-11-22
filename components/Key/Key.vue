@@ -2,7 +2,11 @@
   <div>
     <h1 class="title is-size-4">Uygulama Ayarları</h1>
     <hr>
-    <BaseTable :actionName="'setSelectedKey'" :columns="columns" :canEdit="true" :edit="edit"  :data="settings.key.data"></BaseTable>
+    <BaseTable :columns="columns"
+               :canEdit="true"
+               :edit="edit"
+               :data="settings.key.data">
+    </BaseTable>
     <b-modal :active.sync="settings.key.modal.edit" has-modal-card>
       <Edit></Edit>
     </b-modal>

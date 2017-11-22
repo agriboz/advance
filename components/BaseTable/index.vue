@@ -2,7 +2,6 @@
     <section>
         <b-table
             :data="data"
-            :selected.sync="selected"
             :paginated="ui.tableOpts.isPaginated"
             :per-page="ui.tableOpts.perPage"
             :pagination-simple="ui.tableOpts.isPaginationSimple"
@@ -26,17 +25,8 @@
 import { mapState } from 'vuex'
 
 export default {
-  props: ['data', 'columns', 'edit', 'destroy', 'canEdit', 'canDelete', 'actionName'],
+  props: ['data', 'columns', 'edit', 'destroy', 'canEdit', 'canDelete'],
   computed: {
-    selected: {
-      get () {
-
-      },
-      set (value) {
-        /* const actionName = this.actionName
-        this.$store.commit(actionName, value) */
-      }
-    },
     ...mapState(['ui'])
   }
 }
