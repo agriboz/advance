@@ -1,9 +1,10 @@
 <template>
   <div class="sidebar">
     <div class="has-text-centered">
-        <img class="is-128x128" src="http://bulma.io/images/placeholders/128x128.png">
-        <p class="is-size-5">John Doe</p>
-        <p class="is-size-6">Ücretlendirme ve Yan Haklar</p>
+        <img class="is-128x128" :src="employeeImage">
+        <p class="is-size-6">{{employee.name}} {{employee.surname}}</p>
+        <p class="is-size-7">{{employee.title}}</p>
+        <p class="is-size-7">{{employee.department}}</p>
     </div>
     <hr />
     <aside class="menu">
@@ -25,9 +26,13 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters({
-      menu: 'menu'
-    })
+    employeeImage () {
+      return `data:image/png;base64, ${this.employee.image} `
+    },
+    ...mapGetters(['menu', 'employee'])
+  },
+  mounted () {
+    this.$store.dispatch('employee')
   }
 }
 </script>

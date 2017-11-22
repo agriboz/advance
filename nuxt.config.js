@@ -21,7 +21,8 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'stylesheet',
-        href: '//cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css'
+        href:
+          '//cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css'
       }
     ]
   },
@@ -30,9 +31,8 @@ module.exports = {
     baseURL:
       process.env.NODE_ENV === 'production'
         ? 'http://10.10.27.36:8181'
-        : 'http://localhost:3000',
-    browserBaseURL:
-      'api/adv/v1' /* ,
+        : 'http://10.10.27.36:8181/adv/v1/',
+    /* ,
     errorHandler (errorReason, { error }) {
       Vue.prototype.$toast.open({
         type: 'is-danger',
@@ -42,7 +42,7 @@ module.exports = {
     } */
   },
   loading: { color: '#3B8070' },
-  plugins: ['~/plugins/buefy', '~/plugins/axios'],
+  plugins: ['~/plugins/buefy', '~/plugins/axios', '~/plugins/veeValidate'],
   css: ['animate.css/animate.min.css', 'node_modules/buefy/lib/buefy.min.css'],
   router: {
     linkActiveClass: 'is-active'

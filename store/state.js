@@ -1,4 +1,27 @@
 const state = {
+  settings: {
+    key: {
+      data: [],
+      selected: {},
+      updateSelected: {},
+      modal: {
+        edit: false
+      }
+    },
+    roles: {
+      data: [],
+      searchEmployee: [],
+      selectedEmployee: null
+    }
+  },
+  employee: {},
+  advanceRequest: {
+    data: [],
+    modal: {
+      edit: false,
+      create: false
+    }
+  },
   openSidebar: false,
   menu: [
     {
