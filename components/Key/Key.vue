@@ -35,7 +35,6 @@ export default {
 
   methods: {
     edit (payload) {
-      console.log(payload)
       this.$store.dispatch('editSelectedKey', payload)
       this.$store.dispatch('keyOpenEditModal')
     }

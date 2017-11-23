@@ -8,8 +8,12 @@
             :default-sort-direction="ui.tableOpts.defaultSortDirection">
 
             <template slot-scope="data">
-                <b-table-column sortable v-for="(c,i) in columns" :field="c.field"  :label="c.title"  :key="i">
+                <b-table-column sortable v-for="(c,i) in columns" :inner="c.inner" :field="c.field"  :label="c.title"  :key="i">
                   {{ data.row[c.field] }}
+
+                  <span v-if="c.inner === 'currency'">{{data.row[c.inner]['name']}}</span>
+                  <!-- <span v-if="data.row[c.field]['name']">{{data.row[c.field]['name']}}</span> -->
+                  <span v-if="c.inner === 'requestDate'">{{new Date(data.row[c.inner]).toLocaleDateString()}}</span>
                 </b-table-column>
                 <b-table-column>
                   <button v-if="canEdit" @click="edit(data.row)" class="button field is-info">Detay</button>

@@ -3,8 +3,35 @@ const actions = {
     commit('openSidebar')
   },
 
-  advanceRequestOpenEditModal ({ commit }) {
-    commit('advanceRequestOpenEditModal')
+  advanceRequestOpenModal ({ commit }, type) {
+    commit('advanceRequestOpenModal', type)
+  },
+
+  // Advance Request
+
+  async advanceRequest ({ commit, dispatch, state, router }) {
+    await dispatch('employee')
+    const employeeId = state.employee.id
+    const { data } = await this.$axios.get(`advance/${employeeId}/search`)
+    commit('advanceRequest', data)
+  },
+
+  async setAdvance ({ commit, dispatch, state }, payload) {
+    const { status } = await this.$axios.post(`advance`, payload)
+
+    return status === 200
+      ? dispatch('advanceRequest').then(() => {
+        commit('advanceRequestOpenModal', 'create')
+        state.createAdvance = {
+          amount: 100,
+          amountPercentage: '0'
+        }
+      })
+      : null
+  },
+
+  createAdvance ({ commit, state }, payload) {
+    commit('createAdvance', payload)
   },
 
   // Sidebar Employee
@@ -62,9 +89,7 @@ const actions = {
 
   async removeRole ({ commit, state }, payload) {
     const { status } = await this.$axios.delete(`employee/role/${payload.id}`)
-    return status === 200
-      ? commit('settingsRemoveRole', payload)
-      : null
+    return status === 200 ? commit('settingsRemoveRole', payload) : null
   }
 }
 
