@@ -1,16 +1,21 @@
 <template>
     <section>
         <b-table
+            :checked-rows.sync="checkedRows"
             :data="data"
+            :checkable="checkable"
             :paginated="ui.tableOpts.isPaginated"
             :per-page="ui.tableOpts.perPage"
+            :striped="ui.tableOpts.isStriped"
+            :hoverable="ui.tableOpts.isHoverable"
+            :loading="ui.tableOpts.isLoading"
             :pagination-simple="ui.tableOpts.isPaginationSimple"
             :default-sort-direction="ui.tableOpts.defaultSortDirection">
 
             <template slot-scope="data">
                 <b-table-column sortable v-for="(c,i) in columns" :inner="c.inner" :field="c.field"  :label="c.title"  :key="i">
                   {{ data.row[c.field] }}
-
+                  <span v-if="c.inner === 'employee'">{{data.row[c.inner]['name']}}</span>
                   <span v-if="c.inner === 'currency'">{{data.row[c.inner]['name']}}</span>
                   <!-- <span v-if="data.row[c.field]['name']">{{data.row[c.field]['name']}}</span> -->
                   <span v-if="c.inner === 'requestDate'">{{new Date(data.row[c.inner]).toLocaleDateString()}}</span>
@@ -19,6 +24,20 @@
                   <button v-if="canEdit" @click="edit(data.row)" class="button field is-info">Detay</button>
                   <button v-if="canDelete" @click="destroy(data.row)" class="button field is-danger">Sil</button>
                 </b-table-column>
+            </template>
+
+            <template slot="empty">
+                <section class="section">
+                    <div class="content has-text-grey has-text-centered">
+                        <p>
+                            <b-icon
+                                icon="sentiment_very_dissatisfied"
+                                size="is-large">
+                            </b-icon>
+                        </p>
+                        <p>Nothing here.</p>
+                    </div>
+                </section>
             </template>
         </b-table>
 
@@ -29,9 +48,22 @@
 import { mapState } from 'vuex'
 
 export default {
-  props: ['data', 'columns', 'edit', 'destroy', 'canEdit', 'canDelete'],
+  data () {
+    return {
+      // checkedRows: this.data
+    }
+  },
+  props: ['data', 'columns', 'edit', 'destroy', 'checkable', 'canEdit', 'canDelete'],
   computed: {
-    ...mapState(['ui'])
+    checkedRows: {
+      get () {
+        return this.$store.state.advanceList.checkedRows
+      },
+      set (data) {
+        this.$store.commit('checkedRows', data)
+      }
+    },
+    ...mapState(['ui', 'advanceList'])
   }
 }
 </script>

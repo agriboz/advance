@@ -5,7 +5,6 @@
       </header>
       <form ref="form" @submit.prevent="update(data)">
         <section class="modal-card-body">
-          {{data}}
             <b-field label="Key">
               <b-input :value="data.key"
                        type="number" @input="editSelectedKey('key', $event)"

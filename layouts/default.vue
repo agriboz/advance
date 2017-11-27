@@ -4,7 +4,7 @@
     <div class="columns container is-fluid">
       <Sidebar class="column is-2 animated" :class="[{['fadeOutLeft hide-sidebar']: openSidebar}, 'fadeInLeft']" />
 
-        <nuxt class="column main animated" :class="[{['slideInRight']: openSidebar}]" />
+      <nuxt class="column main animated" :class="[{['slideInRight']: openSidebar}]" />
 
     </div>
   </div>
@@ -17,10 +17,12 @@ import AdvanceHeader from '@/components/Header'
 import Sidebar from '@/components/Sidebar'
 
 export default {
+
   components: {
     AdvanceHeader,
     Sidebar
   },
+
   computed: {
     ...mapState({
       openSidebar: state => state.openSidebar

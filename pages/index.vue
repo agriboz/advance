@@ -15,6 +15,9 @@
 import AdvanceRequest from '@/components/AdvanceRequest/AdvanceRequest'
 
 export default {
+  async asyncData ({app, store, params}) {
+    await store.dispatch('employee')
+  },
   components: {
     AdvanceRequest
   }

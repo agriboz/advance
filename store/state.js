@@ -1,4 +1,12 @@
 const state = {
+  advanceStatus: {
+    employeeRequested: 1,
+    ownerRequested: 3,
+    transferToSap: 5,
+    cancelled: 7,
+    deleted: 9,
+    tansferError: 11
+  },
   settings: {
     key: {
       data: [],
@@ -21,11 +29,16 @@ const state = {
   },
   advanceRequest: {
     data: [],
+    selected: {},
     disableAmount: false,
     modal: {
       edit: false,
       create: false
     }
+  },
+  advanceList: {
+    data: [],
+    checkedRows: []
   },
   openSidebar: false,
   menu: [
@@ -65,7 +78,11 @@ const state = {
       isPaginated: true,
       isPaginationSimple: true,
       defaultSortDirection: 'asc',
-      perPage: 10
+      perPage: 10,
+      checkable: false,
+      isHoverable: true,
+      isStriped: true,
+      isLoading: true
     }
   }
 }

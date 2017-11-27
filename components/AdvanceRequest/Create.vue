@@ -5,7 +5,7 @@
       </header>
       <section class="modal-card-body">
        <b-field label="%50 Oranında maaşımı avans olarak istiyorum ">
-          <b-switch :value="amountPercentage" true-value="50" false-value="0"  @input="createAdvance('amountPercentage', $event)"></b-switch>
+          <b-switch :value="amountPercentage" true-value="50" false-value="0" @input="createAdvance('amountPercentage', $event)"></b-switch>
         </b-field>
 
         <b-field label="Avans Tutarı">
@@ -25,9 +25,6 @@ import {mapState} from 'vuex'
 
 export default {
   computed: {
-    disableAmount () {
-      return this.$store.state.createAdvance.amountPercentage === '50'
-    },
     ...mapState({
       amount: state => state.createAdvance.amount,
       amountPercentage: state => state.createAdvance.amountPercentage,

@@ -1,21 +1,22 @@
 import Vue from 'vue'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
 const { $toast } = Vue.prototype
 
-export default function ({ app: { $axios, router } }, inject) {
+export default function ({ app: { $axios, router, store } }, inject) {
   $axios.interceptors.response.use(
     response => {
-      console.log(response)
       if (response.status === 200 && response.config.method !== 'get') {
         $toast.open({
           type: 'is-success',
           message: 'İşlem Başarılı'
         })
       }
+      store.state.ui.tableOpts.isLoading = false
       return response
     },
     error => {
-      console.dir(error)
-      console.dir(error.statusCode)
       if (error.statusCode === 401) {
         $toast.open({
           type: 'is-danger',

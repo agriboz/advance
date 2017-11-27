@@ -7,10 +7,15 @@ const getters = {
     return state.employee
   },
 
-  deneme (state, heyo) {
-    return state.settings.roles.searchEmployee.filter(item => {
+  advanceRequestList (state) {
+    const {
+      employeeRequested,
+      ownerRequested,
+      transferToSap
+    } = state.advanceStatus
+    return state.advanceRequest.data.filter(item => {
       return (
-        Object.keys(item)
+        item.status.id <= (employeeRequested || ownerRequested || transferToSap)
       )
     })
   }

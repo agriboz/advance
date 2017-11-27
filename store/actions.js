@@ -10,10 +10,13 @@ const actions = {
   // Advance Request
 
   async advanceRequest ({ commit, dispatch, state, router }) {
-    await dispatch('employee')
     const employeeId = state.employee.id
     const { data } = await this.$axios.get(`advance/${employeeId}/search`)
     commit('advanceRequest', data)
+  },
+
+  editSelectedAdvance ({ commit, state }, payload) {
+    commit('editSelectedAdvance', payload)
   },
 
   async setAdvance ({ commit, dispatch, state }, payload) {
@@ -28,6 +31,20 @@ const actions = {
         }
       })
       : null
+  },
+
+  editAdvance ({ commit, state }, payload) {
+    commit('editAdvance', payload)
+  },
+
+  async updateAdvance ({ commit, state }, payload) {
+    const { status } = await this.$axios.put(`advance/${payload.id}`, payload)
+    return status === 200 ? commit('updateAdvance', payload) : null
+  },
+
+  async destroyAdvance ({ commit, state }, payload) {
+    const { status } = await this.$axios.post(`advance/cancel/`, [payload])
+    return status === 200 ? commit('destroyAdvance', payload) : null
   },
 
   createAdvance ({ commit, state }, payload) {
@@ -90,6 +107,20 @@ const actions = {
   async removeRole ({ commit, state }, payload) {
     const { status } = await this.$axios.delete(`employee/role/${payload.id}`)
     return status === 200 ? commit('settingsRemoveRole', payload) : null
+  },
+
+  // Advance List
+  async advanceList ({ commit, dispatch, state, router }) {
+    const employee = {id: state.employee.id}
+    const { data } = await this.$axios.post(`advance/search`, {employee})
+    commit('advanceList', data)
+  },
+
+  async destroyAdvanceList ({ commit, state }) {
+    const payload = state.advanceList.checkedRows
+    commit('destroyAdvanceList', payload)
+    /* const { status } = await this.$axios.post(`advance/cancel/`, payload)
+    return status === 200 ? commit('destroyAdvanceList', payload) : null */
   }
 }
 

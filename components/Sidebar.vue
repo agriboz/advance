@@ -32,10 +32,10 @@ export default {
     ...mapGetters(['menu', 'employee'])
   },
   mounted () {
-    console.log(this.$router)
+    /* console.log(this.$router)
     if (this.$router.history.current.path !== '/') {
       this.$store.dispatch('employee')
-    }
+    } */
   }
 }
 </script>

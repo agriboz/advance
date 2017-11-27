@@ -13,6 +13,26 @@ const mutations = {
     state.advanceRequest.data = payload
   },
 
+  editSelectedAdvance (state, field) {
+    Object.assign(state.advanceRequest.selected, field)
+  },
+
+  editAdvance (state, payload) {
+    Object.assign(state.advanceRequest.selected, payload)
+  },
+
+  updateAdvance (state, payload) {
+    state.advanceRequest.data = state.advanceRequest.data.map(
+      item => (item.id === payload.id ? payload : item)
+    )
+  },
+
+  destroyAdvance (state, payload) {
+    state.advanceRequest.data = state.advanceRequest.data.filter(
+      item => item.id !== payload.id
+    )
+  },
+
   createAdvance (state, payload) {
     const employee = state.employee
     const ownerEmployee = {
@@ -29,6 +49,7 @@ const mutations = {
   disableAmount (state) {
     state.advanceRequest.disableAmount = !state.advanceRequest.disableAmount
     state.createAdvance.amount = 0
+    state.advanceRequest.selected.amount = 0
   },
 
   // Sidebar
@@ -77,6 +98,23 @@ const mutations = {
 
   selectedEmployee (state, payload) {
     state.settings.roles.selectedEmployee = payload
+  },
+
+  // Advance List
+
+  advanceList (state, payload) {
+    state.advanceList.data = payload
+  },
+
+  checkedRows (state, payload) {
+    state.advanceList.checkedRows = payload
+  },
+
+  destroyAdvanceList (state, payload) {
+    const stated = state.advanceList.checkedRows
+    state.advanceList.data = state.advanceList.data.filter(item =>
+      !stated.includes(item)
+    )
   }
 }
 

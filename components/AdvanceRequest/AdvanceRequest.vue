@@ -4,7 +4,7 @@
       <a @click="openModalCreate('create')"
          class="button is-info is-pulled-right">Yeni Avans Ekle</a>
     </div>
-    <BaseTable :columns="columnsTemplate" :edit="edit" :data="advanceRequest.data"></BaseTable>
+    <BaseTable :columns="columnsTemplate" :canEdit="true" :edit="edit" :data="advanceRequestList"></BaseTable>
 
     <b-modal :active.sync="advanceRequest.modal.create" has-modal-card>
       <Create></Create>
@@ -16,7 +16,7 @@
   </div>
 </template>
 <script>
-import {mapState, mapActions} from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import BaseTable from '@/components/BaseTable'
 import Edit from '@/components/AdvanceRequest/Edit'
 import Create from '@/components/AdvanceRequest/Create'
@@ -39,12 +39,14 @@ export default {
     openModalCreate (create) {
       this.$store.dispatch('advanceRequestOpenModal', create)
     },
-    ...mapActions({
-      edit: 'advanceRequestOpenEditModal'
-    })
+    edit (payload) {
+      this.$store.dispatch('editSelectedAdvance', payload)
+      this.$store.dispatch('advanceRequestOpenModal', 'edit')
+    }
   },
   computed: {
-    ...mapState(['advanceRequest'])
+    ...mapState(['advanceRequest']),
+    ...mapGetters(['advanceRequestList'])
   },
   components: {
     BaseTable,
