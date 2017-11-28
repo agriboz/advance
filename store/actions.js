@@ -59,7 +59,7 @@ const actions = {
 
   // Settings - Roles
 
-  async rolesSettings ({ commit }) {
+  /* async rolesSettings ({ commit }) {
     const { data } = await this.$axios.get('role/1/employees')
     commit('settingsRoles', data)
   },
@@ -82,7 +82,7 @@ const actions = {
   async removeRole ({ commit, state }, payload) {
     const { status } = await this.$axios.delete(`employee/role/${payload.id}`)
     return status === 200 ? commit('settingsRemoveRole', payload) : null
-  },
+  }, */
 
   // Advance List
   async advanceList ({ commit, dispatch, state, router }) {

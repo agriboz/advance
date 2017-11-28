@@ -1,4 +1,5 @@
 const roles = {
+  namespaced: true,
   state: {
     data: [],
     searchEmployee: [],
@@ -10,9 +11,7 @@ const roles = {
     },
 
     settingsRemoveRole (state, payload) {
-      state.data = state.data.filter(
-        item => item.id !== payload.id
-      )
+      state.data = state.data.filter(item => item.id !== payload.id)
     },
 
     settingsRoles (state, payload) {
@@ -25,6 +24,33 @@ const roles = {
 
     selectedEmployee (state, payload) {
       state.selectedEmployee = payload
+    }
+  },
+  actions: {
+    async rolesSettings ({ commit }) {
+      const { data } = await this.$axios.get('role/1/employees')
+      commit('settingsRoles', data)
+    },
+
+    async searchEmployee ({ commit, state }, payload) {
+      const { data } = await this.$axios.get(`employee/search/${payload}`)
+      commit('searchEmployee', data)
+    },
+
+    async setRole ({ commit, state }) {
+      const selectedEmployee = state.selectedEmployee.id
+      const { status } = await this.$axios.post(`employee/role/${selectedEmployee}`, {
+        id: 1
+      })
+
+      return status === 200
+        ? commit('settingsAddRoles', state.settings.roles.selectedEmployee)
+        : null
+    },
+
+    async removeRole ({ commit, state }, payload) {
+      const { status } = await this.$axios.delete(`employee/role/${payload.id}`)
+      return status === 200 ? commit('settingsRemoveRole', payload) : null
     }
   }
 }

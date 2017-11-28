@@ -7,24 +7,25 @@
           <b-autocomplete
               v-model="name"
               @input="getEmployeeData(name)"
-              :data="settings.roles.searchEmployee"
+              :data="roles.searchEmployee"
               placeholder="Personel Ara"
               icon="magnify"
               field="name"
-              @select="option => settings.roles.selectedEmployee = option">
+              @select="option => $store.commit('roles/selectedEmployee', option)">
 
               <template slot="empty">Arama kriterine uygun sonuç bulunamadı.</template>
           </b-autocomplete>
       </b-field>
-      <button v-if="settings.roles.selectedEmployee"
-              @click="setRole(settings.roles.selectedEmployee.id)"
+      <button v-if="roles.selectedEmployee"
+              @click="setRole"
               class="button field is-info">Rol Listesine Ekle</button>
     </div>
+
     <BaseTable :columns="columns"
                :destroy="removeRole"
                :canDelete="true"
                :canEdit="false"
-               :data="settings.roles.data">
+               :data="roles.data">
     </BaseTable>
   </div>
 </template>
@@ -49,25 +50,22 @@ export default {
     }
   },
   methods: {
+    ...mapActions('roles', ['setRole']),
+
     getEmployeeData: debounce(function (data) {
       return data.length >= 3
-        ? this.$store.dispatch('searchEmployee', data)
+        ? this.$store.dispatch('roles/searchEmployee', data)
         : ''
     }, 1000),
 
     removeRole (payload) {
-      this.$store.dispatch('removeRole', payload)
-    },
+      this.$store.dispatch('roles/removeRole', payload)
+    }
 
-    ...mapActions(['setRole'])
   },
 
   computed: {
-    ...mapState(['settings'])
-  },
-
-  mounted () {
-    this.$store.dispatch('rolesSettings')
+    ...mapState(['roles'])
   },
 
   components: {

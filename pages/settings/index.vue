@@ -7,7 +7,6 @@ import Key from '@/components/Key/Key'
 
 export default {
   async asyncData ({app, store, params}) {
-    console.log(store)
     if (!store.state.employee) {
       await store.dispatch('employee')
     }
