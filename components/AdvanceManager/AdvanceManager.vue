@@ -41,9 +41,6 @@ export default {
   },
   components: {
     BaseTable
-  },
-  mounted () {
-    this.$store.dispatch('advanceList')
   }
 }
 </script>

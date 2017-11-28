@@ -22,7 +22,7 @@ const state = {
       selectedEmployee: null
     }
   },
-  employee: {},
+  employee: null,
   createAdvance: {
     amount: 100,
     amountPercentage: '0'

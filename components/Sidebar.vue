@@ -30,12 +30,6 @@ export default {
       return `data:image/png;base64, ${this.employee.image} `
     },
     ...mapGetters(['menu', 'employee'])
-  },
-  mounted () {
-    /* console.log(this.$router)
-    if (this.$router.history.current.path !== '/') {
-      this.$store.dispatch('employee')
-    } */
   }
 }
 </script>

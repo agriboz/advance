@@ -22,9 +22,6 @@ import Edit from '@/components/AdvanceRequest/Edit'
 import Create from '@/components/AdvanceRequest/Create'
 
 export default {
-  mounted () {
-    this.$store.dispatch('advanceRequest')
-  },
   data () {
     return {
       columnsTemplate: [

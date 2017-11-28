@@ -34,7 +34,6 @@ export default function ({ app: { $axios, router, store } }, inject) {
 
   $axios.interceptors.request.use(
     config => {
-      console.log(config)
       return config
     },
     error => {
