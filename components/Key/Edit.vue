@@ -40,7 +40,7 @@ import {mapActions, mapState} from 'vuex'
 export default {
   computed: {
     ...mapState({
-      data: state => state.settings.key.selected
+      data: state => state.key.selected
     })
   },
 
@@ -48,19 +48,19 @@ export default {
     update (payload) {
       this.$validator.validateAll().then((result) => {
         if (result) {
-          return this.$store.dispatch('updateSelectedKey', payload)
+          return this.$store.dispatch('key/updateSelectedKey', payload)
         }
       }).catch(e => {
         console.log(e)
       })
     },
     editSelectedKey (field, value) {
-      this.$store.commit('editSelectedKey', {
+      this.$store.commit('key/editSelectedKey', {
         [field]: value
       })
     },
     ...mapActions({
-      closeModal: 'keyOpenEditModal'
+      closeModal: 'key/keyOpenEditModal'
     })
   }
 }

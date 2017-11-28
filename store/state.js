@@ -7,21 +7,6 @@ const state = {
     deleted: 9,
     tansferError: 11
   },
-  settings: {
-    key: {
-      data: [],
-      selected: {},
-      updateSelected: {},
-      modal: {
-        edit: false
-      }
-    },
-    roles: {
-      data: [],
-      searchEmployee: [],
-      selectedEmployee: null
-    }
-  },
   employee: null,
   createAdvance: {
     amount: 100,

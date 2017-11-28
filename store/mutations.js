@@ -60,7 +60,7 @@ const mutations = {
 
   // Settings - Key
 
-  editSelectedKey (state, field) {
+  /* editSelectedKey (state, field) {
     Object.assign(state.settings.key.selected, field)
   },
 
@@ -74,11 +74,11 @@ const mutations = {
 
   setSelectedKey (state, selectedKey) {
     state.settings.key.selected = selectedKey
-  },
+  }, */
 
   // Settings - Roles
 
-  settingsAddRoles (state, payload) {
+  /* settingsAddRoles (state, payload) {
     state.settings.roles.data = [...state.settings.roles.data, payload]
   },
 
@@ -98,7 +98,7 @@ const mutations = {
 
   selectedEmployee (state, payload) {
     state.settings.roles.selectedEmployee = payload
-  },
+  }, */
 
   // Advance List
 

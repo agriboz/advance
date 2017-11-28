@@ -5,9 +5,9 @@
     <BaseTable :columns="columns"
                :canEdit="true"
                :edit="edit"
-               :data="settings.key.data">
+               :data="key.data">
     </BaseTable>
-    <b-modal :active.sync="settings.key.modal.edit" has-modal-card>
+    <b-modal :active.sync="key.modal.edit" has-modal-card>
       <Edit></Edit>
     </b-modal>
   </div>
@@ -29,19 +29,15 @@ export default {
     }
   },
 
-  mounted () {
-    this.$store.dispatch('keySettings')
-  },
-
   methods: {
     edit (payload) {
-      this.$store.dispatch('editSelectedKey', payload)
-      this.$store.dispatch('keyOpenEditModal')
+      this.$store.dispatch('key/editSelectedKey', payload)
+      this.$store.dispatch('key/keyOpenEditModal')
     }
   },
 
   computed: {
-    ...mapState(['settings'])
+    ...mapState(['key'])
   },
 
   components: {
