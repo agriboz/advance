@@ -12,7 +12,6 @@
         <li :key="m.id" v-for="m of menu">
           <nuxt-link exact :to="m.link">
             <b-icon :icon="m.icon"></b-icon>
-
             {{m.name}}
           </nuxt-link>
         </li>

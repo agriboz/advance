@@ -17,7 +17,6 @@ import AdvanceHeader from '@/components/Header'
 import Sidebar from '@/components/Sidebar'
 
 export default {
-
   components: {
     AdvanceHeader,
     Sidebar
@@ -25,7 +24,7 @@ export default {
 
   computed: {
     ...mapState({
-      openSidebar: state => state.openSidebar
+      openSidebar: state => state.ui.openSidebar
     })
   }
 }

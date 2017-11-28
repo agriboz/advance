@@ -1,6 +1,6 @@
 const getters = {
   menu (state) {
-    return state.menu
+    return state.ui.menu
   },
 
   employee (state) {
