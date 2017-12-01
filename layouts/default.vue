@@ -2,7 +2,7 @@
   <div>
     <AdvanceHeader />
     <div class="columns container is-fluid">
-      <Sidebar class="column is-2 animated" :class="[{['fadeOutLeft hide-sidebar']: openSidebar}, 'fadeInLeft']" />
+      <Sidebar class="animated" :class="[{['fadeOutLeft hide-sidebar']: openSidebar}, 'fadeInLeft']" />
 
       <nuxt class="column main animated" :class="[{['slideInRight']: openSidebar}]" />
 
@@ -42,12 +42,12 @@ html {
   box-shadow: 0 2px 3px hsla(0,0%,7%,.1), 0 0 0 1px hsla(0,0%,7%,.1);
 }
 
-.columns {
-  margin-top: 0;
+.main {
+  margin-left: 50px;
 }
 
-.sidebar {
-  margin-right: 1rem;
+.columns {
+  margin-top: 0;
 }
 
 .align-end {

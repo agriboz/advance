@@ -1,27 +1,55 @@
 <template>
   <header>
-    <nav class="navbar has-shadow">
+    <div class="navbar has-shadow">
       <div class="navbar-brand">
-        <div @click="openSidebar" class="navbar-item">
-          <div class="block">
-            <b-icon icon="menu"></b-icon>
-          </div>
-        </div>
-
         <a class="navbar-item">
-          <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
+          <img src="~/assets/logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
         </a>
       </div>
-    </nav>
+        <div class="navbar-end">
+          <div class="media">
+            <div class="media-content">
+              <div class="content">
+                <p class="is-size-7">
+                  <strong>{{employee.name}} {{employee.surname}}</strong>
+                  <br>
+                  <small>{{employee.title}}</small>
+                  <br>
+                  <small>{{employee.department}}</small>
+                </p>
+              </div>
+            </div>
+            <figure class="media-right employee-figure">
+              <p class="image is-48x48">
+                <img class="employee-image" :src="employeeImage">
+              </p>
+            </figure>
+          </div>
+        </div>
+    </div>
   </header>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
-  methods: {
-    ...mapActions(['openSidebar'])
+  computed: {
+    employeeImage () {
+      return `data:image/png;base64, ${this.employee.image} `
+    },
+    ...mapGetters(['employee'])
   }
 }
 </script>
+
+<style scoped>
+.employee-figure {
+    margin-right: 1rem;
+    margin-top: .2rem;
+}
+.employee-image {
+  height: 100%;
+  border-radius: 100%;
+}
+</style>
