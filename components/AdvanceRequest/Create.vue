@@ -14,7 +14,7 @@
         </b-field>
       </section>
       <footer class="modal-card-foot align-end">
-        <button @click="setAdvance($store.state.createAdvance)" class="button is-info">Talep Et</button>
+        <button @click="setAdvance('advance', $store.state.createAdvance)" class="button is-info">Talep Et</button>
         <button class="button" @click="closeModal('create')" type="button">Kapat</button>
       </footer>
     </div>
@@ -39,8 +39,9 @@ export default {
       this.$store.dispatch('advanceRequestOpenModal', create)
     },
 
-    setAdvance (data) {
-      this.$store.dispatch('setAdvance', data)
+    setAdvance (url, data) {
+      const payload = { url: 'advance', data }
+      this.$store.dispatch('setAdvance', payload)
     },
 
     createAdvance (field, value) {

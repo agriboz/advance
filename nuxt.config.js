@@ -30,8 +30,8 @@ module.exports = {
   axios: {
     baseURL:
       process.env.NODE_ENV === 'production'
-        ? 'http://10.10.27.36:8181'
-        : 'http://10.10.27.36:8181/adv/v1/',
+        ? 'http://10.10.27.36:8181/adv/v1/'
+        : 'http://10.10.27.36:8181/adv/v1/'
     /* ,
     errorHandler (errorReason, { error }) {
       Vue.prototype.$toast.open({

@@ -2,27 +2,43 @@
   <div>
     <h1 class="title is-size-4">Bağlı Çalışan İçin Avans Talepleri Ekranı</h1>
     <hr>
-    <div class="field is-grouped is-pulled-right">
-      <div class="control">
-        <button @click="destroyAdvanceList" class="button is-danger">Talepleri İptal Et</button>
-      </div>
-      <div class="control">
-        <button class="button is-info">Bağlı Çalışan İçin Avans Talebi Ekle</button>
+    <div class="is-clearfix">
+      <div class="field is-grouped is-pulled-right is-clearfix">
+        <div class="control">
+          <button @click="destroyAdvanceList" :disabled="!this.$store.state.advanceList.checkedRows.length" class="button is-danger">Talepleri İptal Et</button>
+        </div>
+        <div class="control">
+          <button @click="openModalCreate('create')" class="button is-info">Bağlı Çalışan İçin Avans Talebi Ekle</button>
+        </div>
       </div>
     </div>
 
-    <BaseTable :columns="columnsTemplate" :checkable="true" :data="data"  :canEdit="true"></BaseTable>
+    <b-message style="margin-top:20px" :active.sync="warning" title="Hata" type="is-danger">
+        İptal olan veriye işlem yapamazsınız.
+    </b-message>
+    <BaseTable :columns="columnsTemplate" :checkable="true" :edit="edit" :data="data"  :canEdit="true"></BaseTable>
 
+    <b-modal :active.sync="manager.modal.create" has-modal-card>
+      <Create></Create>
+    </b-modal>
+
+    <b-modal :active.sync="manager.modal.edit" has-modal-card>
+      <Edit></Edit>
+    </b-modal>
   </div>
 </template>
 <script>
 import BaseTable from '@/components/BaseTable'
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
+import Edit from '@/components/AdvanceManager/Edit'
+import Create from '@/components/AdvanceManager/Create'
 
 export default {
   data () {
     return {
+      warning: false,
       columnsTemplate: [
+        { inner: 'status' },
         { title: 'Sicil Numarası', field: 'registery' },
         { title: 'Personel Adı Soyadı', inner: 'employee' },
         { title: 'Avans Tutarı', field: 'amount' },
@@ -32,15 +48,34 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['destroyAdvanceList'])
+    destroyAdvanceList () {
+      const list = this.$store.state.advanceList.checkedRows
+
+      list.filter((item) => {
+        const itemIdCheck = item.status.id === 5 || item.status.id === 7 || item.status.id === 11
+        itemIdCheck
+          ? this.warning = true
+          : this.$store.dispatch('destroyAdvanceList')
+      })
+    },
+    edit (payload) {
+      this.$store.dispatch('editSelectedAdvance', payload)
+      this.$store.dispatch('manager/openModal', 'edit')
+    },
+    openModalCreate () {
+      this.$store.dispatch('manager/openModal', 'create')
+    }
   },
   computed: {
     ...mapState({
-      data: state => state.advanceList.data
+      data: state => state.advanceList.data,
+      manager: state => state.manager
     })
   },
   components: {
-    BaseTable
+    BaseTable,
+    Create,
+    Edit
   }
 }
 </script>

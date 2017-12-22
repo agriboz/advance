@@ -16,6 +16,7 @@
     "@nuxtjs/axios": "^4.4.0",
     "@nuxtjs/webpackmonitor": "^0.0.3",
     "animate.css": "^3.5.2",
+    "axios": "^0.17.1",
     "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.1",
@@ -29,8 +30,10 @@
     "nuxt": "^1.0.0-rc9",
     "vee-validate": "^2.0.0-rc.23",
     "vue": "^2.5.3",
+    "vue-select": "github:sagalbot/vue-select",
     "vue-server-renderer": "^2.5.3",
-    "vue-template-compiler": "2.5.3"
+    "vue-template-compiler": "2.5.3",
+    "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
     "avoriaz": "^6.0.1",

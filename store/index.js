@@ -7,12 +7,16 @@ import getters from './getters'
 
 import key from './key'
 import roles from './roles'
+import manager from './manager'
+import advanceListSolution from './advanceListSolution'
 
 const createStore = () => {
   return new Vuex.Store({
     modules: {
       key,
-      roles
+      roles,
+      manager,
+      advanceListSolution
     },
     state,
     actions,

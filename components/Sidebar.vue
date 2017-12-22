@@ -7,6 +7,13 @@
             <b-icon :icon="m.icon"></b-icon>
             <span class="menu-item">{{m.name}}</span>
           </nuxt-link>
+          <ul>
+            <li :key="a.id" v-for="a of m.children">
+            <nuxt-link class="menu-link" exact :to="a.link">
+              <span class="menu-item">{{a.name}}</span>
+            </nuxt-link>
+            </li>
+          </ul>
         </li>
       </ul>
     </aside>

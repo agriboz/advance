@@ -38,13 +38,13 @@ const roles = {
     },
 
     async setRole ({ commit, state }) {
-      const selectedEmployee = state.selectedEmployee.id
-      const { status } = await this.$axios.post(`employee/role/${selectedEmployee}`, {
+      const selectedEmployee = state.selectedEmployee
+      const { status } = await this.$axios.post(`employee/role/${selectedEmployee.id}`, {
         id: 1
       })
 
       return status === 200
-        ? commit('settingsAddRoles', state.settings.roles.selectedEmployee)
+        ? commit('settingsAddRoles', selectedEmployee)
         : null
     },
 

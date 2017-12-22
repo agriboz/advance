@@ -22,8 +22,8 @@ export default {
   data () {
     return {
       columns: [
-        { title: 'Key', field: 'key' },
-        { title: 'Value', field: 'value' },
+        { title: 'Tarih Bilgileri', field: 'key' },
+        { title: 'Gün', field: 'value' },
         { title: 'Açıklama', field: 'description' }
       ]
     }

@@ -7,6 +7,10 @@ const getters = {
     return state.employee
   },
 
+  checkedRows (state) {
+    return state.advanceList.checkedRows
+  },
+
   advanceRequestList (state) {
     const {
       employeeRequested,

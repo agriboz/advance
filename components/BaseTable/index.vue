@@ -13,8 +13,33 @@
             :default-sort-direction="ui.tableOpts.defaultSortDirection">
 
             <template slot-scope="data">
-                <b-table-column sortable v-for="(c,i) in columns" :inner="c.inner" :field="c.field"  :label="c.title"  :key="i">
+                <b-table-column sortable v-for="(c,i) in columns"   :inner="c.inner" :field="c.field"  :label="c.title"  :key="i">
+
                   {{ data.row[c.field] }}
+
+                  <span v-if="c.inner === 'status'">
+                    <span v-if="data.row[c.inner]['id'] === 11">
+                      <b-icon
+                          type="is-warning"
+                          icon="alert-circle-outline"
+                          size="is-medium">
+                        </b-icon>
+                    </span>
+                    <span v-if="data.row[c.inner]['id'] === 5">
+                      <b-icon
+                          type="is-success"
+                          icon="checkbox-marked-circle-outline"
+                          size="is-medium">
+                        </b-icon>
+                    </span>
+                      <span v-if="data.row[c.inner]['id'] === 7">
+                        <b-icon
+                          type="is-warning"
+                          icon="close-circle"
+                          size="is-medium">
+                        </b-icon>
+                      </span>
+                    </span>
                   <span v-if="c.inner === 'employee'">{{data.row[c.inner]['name']}}</span>
                   <span v-if="c.inner === 'currency'">{{data.row[c.inner]['name']}}</span>
                   <!-- <span v-if="data.row[c.field]['name']">{{data.row[c.field]['name']}}</span> -->
@@ -35,7 +60,7 @@
                                 size="is-large">
                             </b-icon>
                         </p>
-                        <p>Nothing here.</p>
+                        <p>Herhangi bir sonuç bulunamadı.</p>
                     </div>
                 </section>
             </template>
@@ -48,11 +73,6 @@
 import { mapState } from 'vuex'
 
 export default {
-  data () {
-    return {
-      // checkedRows: this.data
-    }
-  },
   props: ['data', 'columns', 'edit', 'destroy', 'checkable', 'canEdit', 'canDelete'],
   computed: {
     checkedRows: {

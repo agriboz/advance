@@ -7,6 +7,8 @@ const state = {
     deleted: 9,
     tansferError: 11
   },
+  companies: [],
+  advanceStatusList: [],
   employee: null,
   createAdvance: {
     amount: 100,
@@ -43,20 +45,31 @@ const state = {
       {
         id: 3,
         name: 'Bağlı Çalışan İçin Avans',
-        link: '/contact',
+        link: '/manager',
         icon: 'account'
       },
       {
         id: 4,
         name: 'Avans Talepleri Listele',
-        link: '/avanstalep',
+        link: '/advance-list',
         icon: 'view-list'
       },
       {
         id: 5,
         name: 'Yönetim',
         link: '/settings',
-        icon: 'settings'
+        icon: 'settings',
+        children: [{
+          id: 6,
+          name: 'Uygulama Ayarları',
+          link: '/settings'
+        },
+        {
+          id: 7,
+          name: 'Çözüm Merkezi Bordro Yetkilisi Tanımlama',
+          link: 'settings/roles'
+        }]
+
       }
     ],
     openSidebar: false,

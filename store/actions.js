@@ -7,6 +7,26 @@ const actions = {
     commit('advanceRequestOpenModal', type)
   },
 
+  async companies ({
+    commit,
+    state
+  }) {
+    const {
+      data
+    } = await this.$axios.get(`advance/companies`)
+    commit('companies', data)
+  },
+
+  async advanceStatusList ({
+    commit,
+    state
+  }) {
+    const {
+      data
+    } = await this.$axios.get(`advance/status`)
+    commit('advanceStatusList', data)
+  },
+
   // Advance Request
 
   async advanceRequest ({ commit, dispatch, state, router }) {
@@ -20,7 +40,7 @@ const actions = {
   },
 
   async setAdvance ({ commit, dispatch, state }, payload) {
-    const { status } = await this.$axios.post(`advance`, payload)
+    const { status } = await this.$axios.post(payload.url, payload.data)
 
     return status === 200
       ? dispatch('advanceRequest').then(() => {
@@ -57,33 +77,6 @@ const actions = {
     commit('employee', data)
   },
 
-  // Settings - Roles
-
-  /* async rolesSettings ({ commit }) {
-    const { data } = await this.$axios.get('role/1/employees')
-    commit('settingsRoles', data)
-  },
-
-  async searchEmployee ({ commit, state }, payload) {
-    const { data } = await this.$axios.get(`employee/search/${payload}`)
-    commit('searchEmployee', data)
-  },
-
-  async setRole ({ commit, dispatch, state }, payload) {
-    const { status } = await this.$axios.post(`employee/role/${payload}`, {
-      id: 1
-    })
-
-    return status === 200
-      ? commit('settingsAddRoles', state.settings.roles.selectedEmployee)
-      : null
-  },
-
-  async removeRole ({ commit, state }, payload) {
-    const { status } = await this.$axios.delete(`employee/role/${payload.id}`)
-    return status === 200 ? commit('settingsRemoveRole', payload) : null
-  }, */
-
   // Advance List
   async advanceList ({ commit, dispatch, state, router }) {
     const employee = {id: state.employee.id}
@@ -91,11 +84,11 @@ const actions = {
     commit('advanceList', data)
   },
 
-  async destroyAdvanceList ({ commit, state }) {
+  async destroyAdvanceList ({ commit, dispatch, state }) {
     const payload = state.advanceList.checkedRows
-    commit('destroyAdvanceList', payload)
-    /* const { status } = await this.$axios.post(`advance/cancel/`, payload)
-    return status === 200 ? commit('destroyAdvanceList', payload) : null */
+
+    const { status } = await this.$axios.post(`advance/cancel/`, payload)
+    return status === 200 ? dispatch('advanceList') : null
   }
 }
 

@@ -5,14 +5,14 @@
       </header>
       <form ref="form" @submit.prevent="update(data)">
         <section class="modal-card-body">
-            <b-field label="Key">
+            <b-field label="Tarih Bilgileri">
               <b-input :value="data.key"
                        type="number" @input="editSelectedKey('key', $event)"
-                       placeholder="Key"
+                       :placeholder="data.key"
                        disabled></b-input>
             </b-field>
 
-            <b-field label="Value"
+            <b-field label="Gün"
                      :type="errors.has('value') ? 'is-danger': ''"
                      :message="errors.first('value')">
               <b-input v-validate="'required|numeric'"

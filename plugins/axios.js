@@ -25,7 +25,8 @@ export default function ({ app: { $axios, router, store } }, inject) {
       } else if (error.statusCode === 500) {
         $toast.open({
           type: 'is-danger',
-          message: 'Something wrong with the server'
+          message: error.response.data.error
+
         })
       }
       return Promise.reject(error)
