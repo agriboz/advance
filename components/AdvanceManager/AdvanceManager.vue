@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="title is-size-4">Bağlı Çalışan İçin Avans Talepleri Ekranı</h1>
+    <h1 class="title is-size-4">Bağlı Çalışan İçin Avans Talepleri</h1>
     <hr>
     <div class="is-clearfix">
       <div class="field is-grouped is-pulled-right is-clearfix">

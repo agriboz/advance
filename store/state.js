@@ -32,16 +32,11 @@ const state = {
     menu: [
       {
         id: 1,
-        name: 'Anasayfa',
+        name: 'Avans Taleplerim',
         link: '/',
         icon: 'home'
       },
-      {
-        id: 2,
-        name: 'Avans Taleplerim',
-        link: '/about',
-        icon: 'cow'
-      },
+
       {
         id: 3,
         name: 'Bağlı Çalışan İçin Avans',

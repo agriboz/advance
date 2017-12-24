@@ -85,7 +85,7 @@ export default {
         { title: 'Avans Tutarı', field: 'amount' },
         { title: '50% mi', field: 'amountPercentage' },
         { title: 'Avans Talep Tarihi', inner: 'requestDate' },
-        { title: 'SAP Gönderildi', field: 'sapSendDate' },
+        { title: 'SAP Gönderildi', inner: 'sapSendDate' },
         { title: 'SAP Açıklaması', field: 'sapMessage' }
       ]
     }

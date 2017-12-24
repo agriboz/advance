@@ -1,7 +1,7 @@
 <template>
     <div class="modal-card">
       <header class="modal-card-head">
-        <p class="modal-card-title">Bağlı Çalışan İçin Avans Talep Et</p>
+        <p class="modal-card-title">Personel Avans Talebi</p>
       </header>
       <section class="modal-card-body">
       <b-field grouped>

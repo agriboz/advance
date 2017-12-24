@@ -22,11 +22,15 @@ export default function ({ app: { $axios, router, store } }, inject) {
           type: 'is-danger',
           message: error.response.data.message
         })
+      } else if (error.statusCode === 404) {
+        $toast.open({
+          type: 'is-info',
+          message: 'Sonuç Bulunamadı'
+        })
       } else if (error.statusCode === 500) {
         $toast.open({
           type: 'is-danger',
           message: error.response.data.error
-
         })
       }
       return Promise.reject(error)

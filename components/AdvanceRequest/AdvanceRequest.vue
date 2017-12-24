@@ -1,6 +1,14 @@
 <template>
   <div>
-    <div class="content is-clearfix">
+    <h1 class="title is-size-4">Avans Taleplerim</h1>
+    <hr>
+    <b-message v-if="!employee.canDemandAdvance" type="is-info" has-icon>
+          İşe girişi tarihiniz, avans talep etmek istediğiniz ay içerisinde olduğu için avans talebi yapamamaktasınız.
+    </b-message>
+    <b-message v-if="!employee.canDemandAdvance" type="is-warning" has-icon>
+          Bulunduğunuz tarihte avans girişi yapılmamaktadır. {{new Date().toLocaleDateString()}} tarihinden sonra avans girişi yapılamamaktadır.
+    </b-message>
+    <div class="content is-clearfix" v-if="employee.canDemandAdvance">
       <a @click="openModalCreate('create')"
          class="button is-info is-pulled-right">Yeni Avans Ekle</a>
     </div>
@@ -26,7 +34,6 @@ export default {
     return {
       columnsTemplate: [
         { title: 'Avans Tutarı', field: 'amount' },
-        { title: 'Para Birimi', inner: 'currency' },
         { title: '%50 mi', field: 'amountPercentage' },
         { title: 'Talep Tarihi', inner: 'requestDate' }
       ]
@@ -42,7 +49,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['advanceRequest']),
+    ...mapState(['advanceRequest', 'employee']),
     ...mapGetters(['advanceRequestList'])
   },
   components: {

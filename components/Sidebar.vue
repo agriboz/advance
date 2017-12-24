@@ -35,7 +35,7 @@ export default {
     position: fixed;
     top: 52px;
     left: 0;
-    z-index:960;
+    z-index:1;
     overflow: hidden;
     height: calc(100vh - 82px);
     transition: width .15s ease-in-out,box-shadow .15s ease-in-out;

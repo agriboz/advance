@@ -14,9 +14,10 @@
 
             <template slot-scope="data">
                 <b-table-column sortable v-for="(c,i) in columns"   :inner="c.inner" :field="c.field"  :label="c.title"  :key="i">
-
+                  <span v-if="c.field === 'amountPercentage'">%</span>
                   {{ data.row[c.field] }}
 
+                  <span v-if="c.field === 'amount'">TL</span>
                   <span v-if="c.inner === 'status'">
                     <span v-if="data.row[c.inner]['id'] === 11">
                       <b-icon
@@ -34,7 +35,7 @@
                     </span>
                       <span v-if="data.row[c.inner]['id'] === 7">
                         <b-icon
-                          type="is-warning"
+                          type="is-danger"
                           icon="close-circle"
                           size="is-medium">
                         </b-icon>
@@ -44,6 +45,13 @@
                   <span v-if="c.inner === 'currency'">{{data.row[c.inner]['name']}}</span>
                   <!-- <span v-if="data.row[c.field]['name']">{{data.row[c.field]['name']}}</span> -->
                   <span v-if="c.inner === 'requestDate'">{{new Date(data.row[c.inner]).toLocaleDateString()}}</span>
+
+                  <span v-if="c.inner === 'sapSendDate'">
+                    <span v-if="data.row[c.inner] !== null">
+                      {{new Date(data.row[c.inner]).toLocaleDateString()}}
+                    </span>
+                  </span>
+
                 </b-table-column>
                 <b-table-column>
                   <button v-if="canEdit" @click="edit(data.row)" class="button field is-info">Detay</button>
