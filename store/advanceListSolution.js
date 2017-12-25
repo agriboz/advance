@@ -1,5 +1,10 @@
 import initialState from './state'
-var _ = require('lodash')
+import {
+  map,
+  assign,
+  mapKeys
+} from 'lodash'
+
 
 const advanceListSolution = {
   namespaced: true,
@@ -66,25 +71,14 @@ const advanceListSolution = {
 
     async sendToSap ({ commit, state, getters }) {
       const payload = getters.checkedRows
-      console.log('fire')
-      // const response = await this.$axios.post(`advance/posttosap`, payload)
-      const response = [
-        {"id":20,"status":{"id":5,"name":"siktirgit"}},
-        {"id":21,"status":{"id":5,"name":"siktirgit"}},
-        {"id":22,"status":{"id":5,"name":"siktirgit"}},
-        {"id":23,"status":{"id":5,"name":"siktirgit"}},
-        {"id":24,"status":{"id":5,"name":"siktirgit"}}
-      ]
+      const response = await this.$axios.post(`advance/posttosap`, payload)
 
-      var newArr = response.map((item, index) => {
-        return state.data.map((res, ine) => {
-          return res.id === item.id ? item : res
-        })
-      })
-      console.log(newArr)
-        commit('data', newArr)
-        // commit('clearCheckedRows')
+      const updatedAray = map(assign(
+        mapKeys(state.data, k => k.id),
+        mapKeys(response.data, k => k.id)
+      ))
 
+      commit('data', updatedAray).then(await commit('clearCheckedRows'))
     },
 
     async advanceSearch ({
