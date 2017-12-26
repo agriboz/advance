@@ -1,6 +1,7 @@
 const manager = {
   namespaced: true,
   state: {
+    authUser: null,
     data: [],
     subordinates: [],
     selectedSubordinates: [],
@@ -25,7 +26,11 @@ const manager = {
 
     employeePhoto (state, payload) {
       state.employeePhoto = payload
+    },
+    SET_USER: function (state, user) {
+      state.authUser = user
     }
+
   },
 
   getters: {
@@ -35,6 +40,17 @@ const manager = {
   },
 
   actions: {
+    nuxtServerInit ({
+      commit
+    }, {
+      req
+    }) {
+      console.log(commit)
+      if (req.session && req.session.authUser) {
+        commit('SET_USER', req.session.authUser)
+      }
+    },
+
     openModal ({ commit }, type) {
       commit('openModal', type)
     },

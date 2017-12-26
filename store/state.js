@@ -41,7 +41,8 @@ const state = {
         id: 3,
         name: 'Bağlı Çalışan İçin Avans',
         link: '/manager',
-        icon: 'account'
+        icon: 'account',
+        visible: null
       },
       {
         id: 4,

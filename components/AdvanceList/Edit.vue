@@ -17,24 +17,24 @@
        </b-field>
 
         <b-field style="margin-top:30px" label="%50 Oranında maaşımı avans olarak isteniyor">
-          <b-switch :value="data.amountPercentage" @input="editAdvance('amountPercentage', $event)"  true-value="50" false-value="0"></b-switch>
+          <b-switch :disabled="data.status.id === 7" :value="data.amountPercentage" @input="editAdvance('amountPercentage', $event)"  true-value="50" false-value="0"></b-switch>
         </b-field>
 
         <b-field label="Avans Tutarı">
-          <b-input type="number" :value="data.amount" @input="editAdvance('amount', $event)"  :disabled="disableAmount" placeholder="Avans Tutarı" required></b-input>
+          <b-input type="number" :value="data.amount" @input="editAdvance('amount', $event)"  :disabled="disableAmount || data.status.id === 7" placeholder="Avans Tutarı" required></b-input>
         </b-field>
 
         <b-field style="margin-top:30px" label="SAP Sistemine Gönderildi mi?">
-          <b-switch :disabled="true" :value="data.sapSendDate" @input="editAdvance('amountPercentage', $event)"></b-switch>
+          <b-switch :disabled="true" :value="checkSendDate"></b-switch>
         </b-field>
 
-        <b-field label="Name">
-            <b-input :disabled="true" :value="data.description"></b-input>
+        <b-field label="Açıklama">
+            <b-input :disabled="true" :value="data.sapMessage"></b-input>
         </b-field>
       </section>
       <footer class="modal-card-foot align-end">
-        <button @click="updateAdvance(data)" class="button is-info">Kaydet</button>
-        <button class="button is-danger" @click="destroyAdvance(data)">İptal Et</button>
+        <button v-if="data.status.id !== 7"  @click="updateAdvance(data)" class="button is-info">Kaydet</button>
+        <button v-if="data.status.id !== 7" class="button is-danger" @click="destroyAdvance(data)">İptal Et</button>
         <button class="button" type="button" @click="closeModal('edit')">Kapat</button>
       </footer>
     </div>
@@ -66,7 +66,9 @@ export default {
     }
   },
   computed: {
-
+    checkSendDate () {
+      return !!this.data.sapSendDate
+    },
     employeePhoto () {
       return `data:image/png;base64, ${this.employeeImage}`
     },

@@ -5,7 +5,6 @@ import {
   mapKeys
 } from 'lodash'
 
-
 const advanceListSolution = {
   namespaced: true,
   state: {
@@ -78,7 +77,8 @@ const advanceListSolution = {
         mapKeys(response.data, k => k.id)
       ))
 
-      commit('data', updatedAray).then(await commit('clearCheckedRows'))
+      commit('data', updatedAray)
+      commit('clearCheckedRows')
     },
 
     async advanceSearch ({

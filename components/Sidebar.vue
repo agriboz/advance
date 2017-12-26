@@ -4,6 +4,7 @@
       <ul class="menu-list">
         <li :key="m.id" v-for="m of menu">
           <nuxt-link class="menu-link" exact :to="m.link">
+            {{m.visible}}
             <b-icon :icon="m.icon"></b-icon>
             <span class="menu-item">{{m.name}}</span>
           </nuxt-link>

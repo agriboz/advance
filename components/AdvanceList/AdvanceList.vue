@@ -102,20 +102,21 @@ export default {
       })
     },
 
-    test () {
+    checkRowsStatus () {
       const list = this.$store.state.advanceList.checkedRows
 
-      const deneme = list.filter((item) => {
+      const rows = list.filter((item) => {
         return item.status.id === 5 || item.status.id === 7 || item.status.id === 11
       })
-      return deneme
+      return rows
     },
 
     destroyAdvanceList () {
-      this.test().length
+      this.checkRowsStatus().length
         ? this.warning = true
         : this.$store.dispatch('advanceListSolution/sendToSap')
     },
+
     edit (payload) {
       this.$store.dispatch('editSelectedAdvance', payload)
       this.$store.dispatch('advanceListSolution/openModal', 'edit')
@@ -128,8 +129,7 @@ export default {
       advanceStatusList: state => state.advanceStatusList,
       advanceListSolution: state => state.advanceListSolution,
       companies: state => state.companies,
-      data: state => state.advanceListSolution.data,
-      manager: state => state.manager
+      data: state => state.advanceListSolution.data
     })
   },
   mounted () {

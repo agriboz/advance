@@ -17,6 +17,12 @@ import AdvanceHeader from '@/components/Header'
 import Sidebar from '@/components/Sidebar'
 
 export default {
+  middleware: 'authenticated',
+  fetch ({app, store, params}) {
+    if (!store.state.employee) {
+      store.dispatch('employee')
+    }
+  },
   components: {
     AdvanceHeader,
     Sidebar

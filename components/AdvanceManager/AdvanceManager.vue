@@ -14,7 +14,7 @@
     </div>
 
     <b-message style="margin-top:20px" :active.sync="warning" title="Hata" type="is-danger">
-        İptal olan veriye işlem yapamazsınız.
+        İptal olan yada SAP'e gönderilmiş veriye işlem yapamazsınız.
     </b-message>
     <BaseTable :columns="columnsTemplate" :checkable="true" :edit="edit" :data="data"  :canEdit="true"></BaseTable>
 
@@ -48,16 +48,21 @@ export default {
     }
   },
   methods: {
-    destroyAdvanceList () {
+    checkRowsStatus () {
       const list = this.$store.state.advanceList.checkedRows
 
-      list.filter((item) => {
-        const itemIdCheck = item.status.id === 5 || item.status.id === 7 || item.status.id === 11
-        itemIdCheck
-          ? this.warning = true
-          : this.$store.dispatch('destroyAdvanceList')
+      const rows = list.filter((item) => {
+        return item.status.id === 5 || item.status.id === 7 || item.status.id === 11
       })
+      return rows
     },
+
+    destroyAdvanceList () {
+      this.checkRowsStatus().length
+        ? this.warning = true
+        : this.$store.dispatch('destroyAdvanceList')
+    },
+
     edit (payload) {
       this.$store.dispatch('editSelectedAdvance', payload)
       this.$store.dispatch('manager/openModal', 'edit')

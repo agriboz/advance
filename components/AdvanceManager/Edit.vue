@@ -27,7 +27,7 @@
       <footer class="modal-card-foot align-end">
         <button :disabled="disabled" @click="updateAdvance(data)" class="button is-info">Talep Et</button>
         <button :disabled="disabled" class="button is-danger" @click="destroyAdvance(data)">İptal Et</button>
-        <button class="button" type="button" @click="closeModal">Kapat</button>
+        <button class="button" type="button" @click="closeModal('edit')">Kapat</button>
       </footer>
     </div>
 </template>
@@ -37,8 +37,8 @@ import { mapState } from 'vuex'
 
 export default {
   methods: {
-    closeModal () {
-      this.$store.dispatch('advanceRequestOpenModal', 'edit')
+    closeModal (edit) {
+      this.$store.dispatch('manager/openModal', edit)
     },
     editAdvance (field, value) {
       if (field === 'amountPercentage') {
