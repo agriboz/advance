@@ -29,7 +29,7 @@
 </template>
 <script>
 import BaseTable from '@/components/BaseTable'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import Edit from '@/components/AdvanceManager/Edit'
 import Create from '@/components/AdvanceManager/Create'
 
@@ -72,8 +72,10 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      data: 'advanceRequestList'
+    }),
     ...mapState({
-      data: state => state.advanceList.data,
       manager: state => state.manager
     })
   },

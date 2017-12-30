@@ -44,7 +44,7 @@ const actions = {
 
     return status === 200
       ? dispatch('advanceRequest').then(() => {
-        commit('advanceRequestOpenModal', 'create')
+        commit('manager/openModal', 'create')
         state.createAdvance = {
           amount: 100,
           amountPercentage: '0'

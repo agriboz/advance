@@ -2,17 +2,16 @@
   <div class="sidebar">
     <aside class="menu">
       <ul class="menu-list">
-        <li :key="m.id" v-for="m of menu">
+        <li :key="m.id" v-if="m.visible"  v-for="m of menu">
           <nuxt-link class="menu-link" exact :to="m.link">
-            {{m.visible}}
             <b-icon :icon="m.icon"></b-icon>
             <span class="menu-item">{{m.name}}</span>
           </nuxt-link>
           <ul>
             <li :key="a.id" v-for="a of m.children">
-            <nuxt-link class="menu-link" exact :to="a.link">
-              <span class="menu-item">{{a.name}}</span>
-            </nuxt-link>
+              <nuxt-link class="menu-link" exact :to="a.link">
+                <span class="menu-item">{{a.name}}</span>
+              </nuxt-link>
             </li>
           </ul>
         </li>
@@ -33,9 +32,9 @@ export default {
 <style scoped>
   .sidebar {
     width: 60px;
-    position: fixed;
-    top: 52px;
-    left: 0;
+    position: sticky;
+    top: 10px;
+    margin-left: -20px;
     z-index:1;
     overflow: hidden;
     height: calc(100vh - 82px);

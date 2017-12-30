@@ -2,8 +2,8 @@ export default function ({
   store,
   error
 }) {
-  console.log(store.state.manager.authUser)
-  if (!store.state.manager.authUser) {
+  console.log(store.state.employee)
+  if (!store.state.employee) {
     error({
       message: 'selam connected',
       statusCode: 403

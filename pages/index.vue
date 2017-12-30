@@ -1,8 +1,6 @@
 <template>
     <section>
-
       <AdvanceRequest></AdvanceRequest>
-
     </section>
 </template>
 
