@@ -3,7 +3,7 @@
       <header class="modal-card-head">
         <p class="modal-card-title">Yeni Avans Talep Et</p>
       </header>
-      <form @submit.prevent="setAdvance($store.state.createAdvance)">
+      <form @submit.prevent="setAdvance('advance', $store.state.createAdvance)">
         <section class="modal-card-body">
         <b-field label="%50 Oranında maaşımı avans olarak istiyorum ">
             <b-switch :value="amountPercentage" true-value="50" false-value="0" @input="createAdvance('amountPercentage', $event)"></b-switch>
@@ -44,6 +44,7 @@ export default {
     setAdvance (url, data) {
       const payload = { url: 'advance', data }
       this.$store.dispatch('setAdvance', payload)
+        .then(this.closeModal('create'))
     },
 
     createAdvance (field, value) {

@@ -1,6 +1,24 @@
+import includes from 'lodash/includes'
+
 const getters = {
   menu (state) {
-    return state.ui.menu
+    const employeeRoles = state.employeeRoles
+    const isManager = includes(employeeRoles, 2)
+    const isSolutionCenter = includes(employeeRoles, 5)
+    // dirty check
+    return state.ui.menu.filter(item => {
+      if (isManager && item.id === 3) {
+        item.visible = true
+      }
+      if ((isManager || isSolutionCenter) && item.id === 3) {
+        item.visible = true
+      }
+      if (isSolutionCenter && item.id === 5) {
+        item.visible = true
+      }
+
+      return item
+    })
   },
 
   employee (state) {

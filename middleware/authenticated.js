@@ -1,12 +1,9 @@
+import includes from 'lodash/includes'
 export default function ({
   store,
   error
 }) {
-  console.log(store.state.employee)
-  if (!store.state.employee) {
-    error({
-      message: 'selam connected',
-      statusCode: 403
-    })
+  if (includes(store.state.employeeRoles, (2))) {
+    return true
   }
 }

@@ -64,8 +64,10 @@ const mutations = {
 
   employee (state, employee) {
     state.employee = employee
-    const setEmployeeRoles = JSON.stringify(employee.roles)
-    localStorage.setItem('auth', setEmployeeRoles)
+  },
+
+  employeeRoles (state, employeeRoles) {
+    state.employeeRoles = employeeRoles
   },
 
   // Advance List

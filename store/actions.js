@@ -1,4 +1,12 @@
+import axios from 'axios'
+import values from 'lodash/values'
 const actions = {
+  async nuxtServerInit  ({ commit }) {
+    const { data } = await axios.get('http://10.10.27.36:8181/adv/v1/employee', { withCredentials: true })
+    commit('employee', data)
+    commit('employeeRoles', values(data.roles))
+  },
+
   openSidebar ({ commit }) {
     commit('openSidebar')
   },
@@ -40,6 +48,7 @@ const actions = {
   },
 
   async setAdvance ({ commit, dispatch, state }, payload) {
+    console.log(payload)
     const { status } = await this.$axios.post(payload.url, payload.data)
 
     return status === 200
@@ -72,10 +81,6 @@ const actions = {
   },
 
   // Sidebar Employee
-  async employee ({ commit }) {
-    const { data } = await this.$axios.get('employee')
-    commit('employee', data)
-  },
 
   // Advance List
   async advanceList ({ commit, dispatch, state, router }) {
@@ -88,7 +93,7 @@ const actions = {
     const payload = state.advanceList.checkedRows
 
     const { status } = await this.$axios.post(`advance/cancel/`, payload)
-    return status === 200 ? dispatch('advanceList') : null
+    return status === 200 ? dispatch('advanceRequest') : null
   }
 }
 

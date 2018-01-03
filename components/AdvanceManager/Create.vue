@@ -56,7 +56,7 @@ export default {
   },
   mounted () {
     this.$store.dispatch('manager/getSubordinates')
-    this.createAdvance()
+    // this.createAdvance()
   },
   methods: {
     closeModal (create) {

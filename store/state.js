@@ -43,21 +43,21 @@ const state = {
         name: 'Bağlı Çalışan İçin Avans',
         link: '/manager',
         icon: 'account',
-        visible: JSON.parse(localStorage.getItem('auth'))[0] === 2
+        visible: false
       },
       {
         id: 4,
         name: 'Avans Talepleri Listele',
         link: '/advance-list',
         icon: 'view-list',
-        visible: JSON.parse(localStorage.getItem('auth'))[0] === 5
+        visible: false
       },
       {
         id: 5,
         name: 'Yönetim',
         link: '/settings',
         icon: 'settings',
-        visible: JSON.parse(localStorage.getItem('auth'))[0] === 5,
+        visible: false,
         children: [{
           id: 6,
           name: 'Uygulama Ayarları',

@@ -9,9 +9,6 @@ import AdvanceRequest from '@/components/AdvanceRequest/AdvanceRequest'
 
 export default {
   async asyncData ({app, store, params}) {
-    if (!store.state.employee) {
-      await store.dispatch('employee')
-    }
     if (!store.state.advanceRequest.data.length) {
       await store.dispatch('advanceRequest')
     }

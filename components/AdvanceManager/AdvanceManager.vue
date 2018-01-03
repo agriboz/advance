@@ -5,7 +5,9 @@
     <div class="is-clearfix">
       <div class="field is-grouped is-pulled-right is-clearfix">
         <div class="control">
-          <button @click="destroyAdvanceList" :disabled="!this.$store.state.advanceList.checkedRows.length" class="button is-danger">Talepleri İptal Et</button>
+          <button @click="destroyAdvanceList"
+                  v-if="this.$store.state.advanceList.checkedRows.length"
+                  :disabled="!this.$store.state.advanceList.checkedRows.length" class="button is-danger">Talepleri İptal Et</button>
         </div>
         <div class="control">
           <button @click="openModalCreate('create')" class="button is-info">Bağlı Çalışan İçin Avans Talebi Ekle</button>
