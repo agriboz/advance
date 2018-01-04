@@ -106,7 +106,7 @@ export default {
       const list = this.$store.state.advanceList.checkedRows
 
       const rows = list.filter((item) => {
-        return item.status.id === 5 || item.status.id === 7 || item.status.id === 11
+        return item.status.id === 5 || item.status.id === 7
       })
       return rows
     },

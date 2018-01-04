@@ -4,7 +4,7 @@
     <div class="columns container is-fluid">
       <Sidebar class="animated" :class="[{['fadeOutLeft hide-sidebar']: openSidebar}, 'fadeInLeft']" />
 
-      <nuxt class="column main animated" :class="[{['slideInRight']: openSidebar}]" />
+      <nuxt v-if="employee" class="column main animated" :class="[{['slideInRight']: openSidebar}]" />
 
     </div>
   </div>
@@ -24,6 +24,7 @@ export default {
 
   computed: {
     ...mapState({
+      employee: state => state.employee,
       openSidebar: state => state.ui.openSidebar
     })
   }

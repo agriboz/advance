@@ -81,6 +81,10 @@ const actions = {
   },
 
   // Sidebar Employee
+  async employee ({commit, state}) {
+    const { data } = await this.$axios.get(`employee`)
+    commit('employee', data)
+  },
 
   // Advance List
   async advanceList ({ commit, dispatch, state, router }) {

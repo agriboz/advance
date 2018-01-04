@@ -6,6 +6,7 @@
 import Key from '@/components/Key/Key'
 
 export default {
+  middleware: 'authenticated',
   async asyncData ({app, store, params}) {
     if (!store.state.employee) {
       await store.dispatch('employee')
