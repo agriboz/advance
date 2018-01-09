@@ -9,20 +9,14 @@ export default function ({
   const isSolutionCenter = route.name === 'advance-list'
   const isAdmin = route.name === 'settings'
 
-  if (isManager && !includes(store.state.employeeRoles, (2))) {
-    error({
-      message: 'Bu sayfayı görüntülemeye izniniz yok.'
-    })
+  if (isManager && !includes(store.state.employeeRoles, (2, 5))) {
+    return redirect('/')
   }
   if (isSolutionCenter && !includes(store.state.employeeRoles, (5))) {
-    error({
-      message: 'Bu sayfayı görüntülemeye izniniz yok.'
-    })
+    return redirect('/')
   }
 
   if (isAdmin && !includes(store.state.employeeRoles, (5))) {
-    error({
-      message: 'Bu sayfayı görüntülemeye izniniz yok.'
-    })
+    return redirect('/')
   }
 }

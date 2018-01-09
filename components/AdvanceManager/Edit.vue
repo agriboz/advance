@@ -41,10 +41,10 @@ export default {
       this.$store.dispatch('manager/openModal', edit)
     },
     editAdvance (field, value) {
+      this.$store.commit('editAdvance', {[field]: value})
       if (field === 'amountPercentage') {
         this.$store.commit('disableAmount')
       }
-      this.$store.commit('editAdvance', {[field]: value})
     },
 
     destroyAdvance (payload) {
@@ -68,7 +68,10 @@ export default {
       employeeImage: state => state.manager.employeePhoto,
       data: state => state.advanceRequest.selected,
       disableAmount: state => state.advanceRequest.disableAmount
-    })
+    }),
+    mounted () {
+      this.$store.commit('disableAmount')
+    }
   }
 }
 </script>

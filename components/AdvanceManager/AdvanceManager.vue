@@ -74,7 +74,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      data: 'advanceRequestList'
+      data: 'advanceRequestListManager'
     }),
     ...mapState({
       manager: state => state.manager

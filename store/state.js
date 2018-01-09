@@ -23,6 +23,9 @@ const state = {
       create: false
     }
   },
+  advanceRequestManager: {
+    data: []
+  },
   advanceList: {
     data: [],
     checkedRows: []
@@ -75,7 +78,7 @@ const state = {
     tableOpts: {
       isPaginated: true,
       isPaginationSimple: true,
-      defaultSortDirection: 'asc',
+      defaultSortDirection: 'desc',
       perPage: 10,
       checkable: false,
       isHoverable: true,

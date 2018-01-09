@@ -75,11 +75,10 @@ export default {
     },
 
     createAdvance (field, value) {
+      this.$store.commit('createAdvance', {[field]: value})
       if (field === 'amountPercentage') {
         this.$store.commit('disableAmount')
       }
-
-      this.$store.commit('createAdvance', {[field]: value})
     }
 
   }

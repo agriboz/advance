@@ -1,6 +1,7 @@
 <template>
     <section>
         <b-table
+        default-sort="['id', 'desc']"
             :checked-rows.sync="checkedRows"
             :data="data"
             :checkable="checkable"
@@ -13,7 +14,7 @@
             :default-sort-direction="ui.tableOpts.defaultSortDirection">
 
             <template slot-scope="data">
-                <b-table-column sortable v-for="(c,i) in columns"   :inner="c.inner" :field="c.field"  :label="c.title"  :key="i">
+                <b-table-column v-for="(c,i) in columns"   :inner="c.inner" :field="c.field"  :label="c.title"  :key="i">
                   <span v-if="c.field === 'amountPercentage'">%</span>
                   {{ data.row[c.field] }}
 

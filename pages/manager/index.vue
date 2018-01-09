@@ -14,8 +14,8 @@ export default {
       await store.dispatch('employee')
     }
 
-    if (!store.state.advanceRequest.data.length) {
-      await store.dispatch('advanceRequest')
+    if (!store.state.advanceRequestManager.data.length) {
+      await store.dispatch('advanceRequestManager')
     }
 
     if (!store.state.manager.employeePhoto) {

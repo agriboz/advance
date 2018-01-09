@@ -43,6 +43,12 @@ const actions = {
     commit('advanceRequest', data)
   },
 
+  async advanceRequestManager ({ commit, dispatch, state, router }) {
+    const employeeId = state.employee.id
+    const { data } = await this.$axios.get(`advance/manager/${employeeId}/search`)
+    commit('advanceRequestManager', data)
+  },
+
   editSelectedAdvance ({ commit, state }, payload) {
     commit('editSelectedAdvance', payload)
   },

@@ -10,9 +10,11 @@
         </b-field>
 
         <b-field label="Avans Tutarı">
-          <b-input type="number" :value="data.amount" @input="editAdvance('amount', $event)"  :disabled="disableAmount" placeholder="Avans Tutarı" required></b-input>
+          <b-input type="number" :value="data.amount" @input="editAdvance('amount', $event)"
+                   :disabled="disableAmount" placeholder="Avans Tutarı" required></b-input>
         </b-field>
       </section>
+
       <footer class="modal-card-foot align-end">
         <button @click="updateAdvance(data)" class="button is-info">Talep Et</button>
         <button class="button is-danger" @click="destroyAdvance(data)">İptal Et</button>
@@ -30,10 +32,10 @@ export default {
       this.$store.dispatch('advanceRequestOpenModal', 'edit')
     },
     editAdvance (field, value) {
+      this.$store.commit('editAdvance', {[field]: value})
       if (field === 'amountPercentage') {
         this.$store.commit('disableAmount')
       }
-      this.$store.commit('editAdvance', {[field]: value})
     },
 
     destroyAdvance (payload) {
@@ -51,6 +53,9 @@ export default {
       data: state => state.advanceRequest.selected,
       disableAmount: state => state.advanceRequest.disableAmount
     })
+  },
+  mounted () {
+    this.$store.commit('disableAmount')
   }
 }
 </script>

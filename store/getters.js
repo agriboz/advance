@@ -14,7 +14,7 @@ const getters = {
         if ((isManager || isSolutionCenter) && item.id === 3) {
           item.visible = true
         }
-        if (isSolutionCenter && item.id === 5) {
+        if (isSolutionCenter && (item.id === 5 || item.id === 4)) {
           item.visible = true
         }
         return item
@@ -37,6 +37,19 @@ const getters = {
       transferToSap
     } = state.advanceStatus
     return state.advanceRequest.data.filter(item => {
+      return (
+        item.status.id <= (employeeRequested || ownerRequested || transferToSap)
+      )
+    })
+  },
+
+  advanceRequestListManager (state) {
+    const {
+      employeeRequested,
+      ownerRequested,
+      transferToSap
+    } = state.advanceStatus
+    return state.advanceRequestManager.data.filter(item => {
       return (
         item.status.id <= (employeeRequested || ownerRequested || transferToSap)
       )

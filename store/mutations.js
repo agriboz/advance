@@ -21,6 +21,10 @@ const mutations = {
     state.advanceRequest.data = payload
   },
 
+  advanceRequestManager (state, payload) {
+    state.advanceRequestManager.data = payload
+  },
+
   editSelectedAdvance (state, field) {
     Object.assign(state.advanceRequest.selected, field)
   },
@@ -55,9 +59,17 @@ const mutations = {
   },
 
   disableAmount (state) {
-    state.advanceRequest.disableAmount = !state.advanceRequest.disableAmount
-    state.createAdvance.amount = 0
-    state.advanceRequest.selected.amount = 0
+    // dirty check
+    if ((state.createAdvance.amountPercentage || state.advanceRequest.selected.amountPercentage) === 50 || (state.createAdvance.amountPercentage || state.advanceRequest.selected.amountPercentage) === '50') {
+      state.advanceRequest.disableAmount = true
+      state.createAdvance.amount = 0
+      state.advanceRequest.selected.amount = 0
+    }
+    if ((state.createAdvance.amountPercentage || state.advanceRequest.selected.amountPercentage) === 0 || (state.createAdvance.amountPercentage || state.advanceRequest.selected.amountPercentage) === '0') {
+      state.advanceRequest.disableAmount = false
+      state.createAdvance.amount = 100
+      state.advanceRequest.selected.amount = 100
+    }
   },
 
   // Sidebar

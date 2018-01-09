@@ -72,12 +72,14 @@ const advanceListSolution = {
       const payload = getters.checkedRows
       const response = await this.$axios.post(`advance/posttosap`, payload)
 
-      const updatedAray = map(assign(
+      const updatedArray = map(assign(
         mapKeys(state.data, k => k.id),
         mapKeys(response.data, k => k.id)
       ))
 
-      commit('data', updatedAray)
+      const sortUpdatedArray = updatedArray.sort((a, b) => b.id - a.id)
+
+      commit('data', sortUpdatedArray)
       commit('clearCheckedRows')
     },
 
