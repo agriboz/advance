@@ -15,6 +15,9 @@ export default {
     if (!store.state.advanceRequest.data.length) {
       await store.dispatch('advanceRequest')
     }
+    if (!store.state.key.data.length) {
+      await store.dispatch('key/keySettings')
+    }
   },
   components: {
     AdvanceRequest

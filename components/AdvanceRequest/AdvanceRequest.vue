@@ -5,10 +5,11 @@
     <b-message v-if="!employee.canDemandAdvance" type="is-info" has-icon>
           İşe girişi tarihiniz, avans talep etmek istediğiniz ay içerisinde olduğu için avans talebi yapamamaktasınız.
     </b-message>
-    <b-message v-if="!employee.canDemandAdvance" type="is-warning" has-icon>
-          Bulunduğunuz tarihte avans girişi yapılmamaktadır. {{new Date().toLocaleDateString()}} tarihinden sonra avans girişi yapılamamaktadır.
+    <b-message v-if="employee.canDemandAdvance && (canDemandAdvanceInCurrentDay === false)" type="is-warning" has-icon>
+          Bulunduğunuz tarihte avans girişi yapılmamaktadır. Ayın {{key.data[1].value}} - {{key.data[0].value}} günleri arasında avans girişi yapılabilmektedir.
     </b-message>
-    <div class="content is-clearfix" v-if="employee.canDemandAdvance">
+
+    <div class="content is-clearfix" v-if="employee.canDemandAdvance && employee.canDemandAdvanceInCurrentDay">
       <a @click="openModalCreate('create')"
          class="button is-info is-pulled-right">Yeni Avans Ekle</a>
     </div>
@@ -49,7 +50,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['advanceRequest', 'employee']),
+    ...mapState(['advanceRequest', 'employee', 'key']),
     ...mapGetters(['advanceRequestList'])
   },
   components: {

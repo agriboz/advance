@@ -1,7 +1,7 @@
 import axios from 'axios'
 import values from 'lodash/values'
 const actions = {
-  async nuxtServerInit  ({ commit }) {
+  async browserInit  ({ commit }) {
     const { data } = await axios.get('http://10.10.27.36:8181/adv/v1/employee', { withCredentials: true })
     commit('employee', data)
     commit('employeeRoles', values(data.roles))

@@ -25,6 +25,6 @@ const createStore = () => {
   })
 }
 
-createStore().dispatch('nuxtServerInit')
+createStore().dispatch('browserInit')
 
 export default createStore
