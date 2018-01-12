@@ -4,16 +4,19 @@
         <p class="modal-card-title">Bağlı Çalışan İçin Avans Talep Et</p>
       </header>
       <form @submit.prevent="setAdvance($store.state.createAdvance)">
-        <section class="modal-card-body">
-          <b-field label="Personel Ad Soyad"
-                      :type="errors.has('subordinate') ? 'is-danger': ''"
-                      :message="errors.first('subordinate')">
 
-          <v-select v-validate="'required'"
+        <section class="modal-card-body">
+           {{$v}}
+           {{$v.subordinate.$error}}
+          <b-field label="Personel Ad Soyad"
+                      :type="$v.subordinate.$error ? 'is-danger' : ''"
+                      :message="$v.subordinate.$error ? 'Zorunlu alan': ''">
+
+          <v-select v-model="subordinate"
                     name="subordinate"
                     multiple
                     required
-                    @input="createAdvance('employeeList', $event)"
+                    @input="$v.subordinate.$touch(); createAdvance('employeeList', $event)"
                     :value.sync="selectedSubordinates"
                     :options="subordinates"></v-select>
 
@@ -29,7 +32,7 @@
           </b-field>
         </section>
         <footer class="modal-card-foot align-end">
-          <button type="submit" class="button is-info">Talep Et</button>
+          <button :disabled="$v.$invalid" type="submit" class="button is-info">Talep Et</button>
           <button class="button" @click="closeModal('create')" type="button">Kapat</button>
         </footer>
       </form>
@@ -39,10 +42,23 @@
 <script>
 import vSelect from 'vue-select'
 import {mapState} from 'vuex'
+import { required, minLength } from 'vuelidate/lib/validators'
 
 export default {
+  data () {
+    return {
+      subordinate: ''
+    }
+  },
   components: {
     vSelect
+  },
+
+  validations: {
+    subordinate: {
+      required,
+      minLength: minLength(1)
+    }
   },
 
   computed: {
@@ -63,17 +79,11 @@ export default {
       this.$store.dispatch('manager/openModal', create)
     },
 
-    setAdvance (data) {
+    async setAdvance (data) {
       const payload = { url: 'advance/bulk', data }
-      this.$validator.validateAll().then((result) => {
-        if (result) {
-          return this.$store.dispatch('setAdvance', payload)
-        }
-      }).catch(e => {
-        console.log(e)
-      })
+      await this.$store.dispatch('setAdvance', payload)
+      await this.$store.dispatch('advanceRequestManager', payload)
     },
-
     createAdvance (field, value) {
       this.$store.commit('createAdvance', {[field]: value})
       if (field === 'amountPercentage') {
