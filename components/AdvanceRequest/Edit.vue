@@ -38,9 +38,10 @@ export default {
       }
     },
 
-    destroyAdvance (payload) {
-      this.$store.dispatch('destroyAdvance', payload)
-      this.closeModal()
+    async destroyAdvance (payload) {
+      await this.$store.dispatch('destroyAdvance', payload)
+      await this.$store.dispatch('advanceRequest')
+      await this.closeModal()
     },
 
     updateAdvance (payload) {

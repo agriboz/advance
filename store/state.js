@@ -5,7 +5,7 @@ const state = {
     transferToSap: 5,
     cancelled: 7,
     deleted: 9,
-    tansferError: 11
+    transferError: 11
   },
   companies: [],
   advanceStatusList: [],

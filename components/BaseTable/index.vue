@@ -19,27 +19,43 @@
                   {{ data.row[c.field] }}
 
                   <span v-if="c.field === 'amount'">TL</span>
+
                   <span v-if="c.inner === 'status'">
+                    <span v-if="data.row[c.inner]['id'] === 1">
+                      <b-tooltip label="Değerlendiriliyor">
+                        <b-icon
+                          type="is-info"
+                          icon="dna"
+                          size="is-medium">
+                        </b-icon>
+                      </b-tooltip>
+                    </span>
                     <span v-if="data.row[c.inner]['id'] === 11">
-                      <b-icon
+                      <b-tooltip label="SAP Transfer Hatası">
+                        <b-icon
                           type="is-warning"
                           icon="alert-circle-outline"
                           size="is-medium">
                         </b-icon>
+                      </b-tooltip>
                     </span>
                     <span v-if="data.row[c.inner]['id'] === 5">
-                      <b-icon
-                          type="is-success"
-                          icon="checkbox-marked-circle-outline"
-                          size="is-medium">
+                      <b-tooltip label="Avans Talebiniz Alındı">
+                        <b-icon
+                            type="is-success"
+                            icon="checkbox-marked-circle-outline"
+                            size="is-medium">
                         </b-icon>
+                      </b-tooltip>
                     </span>
                       <span v-if="data.row[c.inner]['id'] === 7">
-                        <b-icon
-                          type="is-danger"
-                          icon="close-circle"
-                          size="is-medium">
-                        </b-icon>
+                        <b-tooltip label="İptal Edildi">
+                          <b-icon
+                            type="is-danger"
+                            icon="close-circle"
+                            size="is-medium">
+                          </b-icon>
+                        </b-tooltip>
                       </span>
                     </span>
                   <span v-if="c.inner === 'employee'">{{data.row[c.inner]['name']}}</span>

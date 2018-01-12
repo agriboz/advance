@@ -5,7 +5,7 @@
     <b-message v-if="!employee.canDemandAdvance" type="is-info" has-icon>
           İşe girişi tarihiniz, avans talep etmek istediğiniz ay içerisinde olduğu için avans talebi yapamamaktasınız.
     </b-message>
-    <b-message v-if="employee.canDemandAdvance && (canDemandAdvanceInCurrentDay === false)" type="is-warning" has-icon>
+    <b-message v-if="employee.canDemandAdvance && (employee.canDemandAdvanceInCurrentDay === false)" type="is-warning" has-icon>
           Bulunduğunuz tarihte avans girişi yapılmamaktadır. Ayın {{key.data[1].value}} - {{key.data[0].value}} günleri arasında avans girişi yapılabilmektedir.
     </b-message>
 
@@ -34,6 +34,7 @@ export default {
   data () {
     return {
       columnsTemplate: [
+        { title: 'Talep Durumu', inner: 'status' },
         { title: 'Avans Tutarı', field: 'amount' },
         { title: '%50 mi', field: 'amountPercentage' },
         { title: 'Talep Tarihi', inner: 'requestDate' }
