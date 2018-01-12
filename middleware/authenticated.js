@@ -9,7 +9,7 @@ export default function ({
   const isSolutionCenter = route.name === 'advance-list'
   const isAdmin = route.name === 'settings'
 
-  if (isManager && !includes(store.state.employeeRoles, (2, 5))) {
+  if (isManager && !store.state.employeeRoles.some(v => [2, 5].indexOf(v) !== -1)) {
     return redirect('/')
   }
   if (isSolutionCenter && !includes(store.state.employeeRoles, (5))) {
