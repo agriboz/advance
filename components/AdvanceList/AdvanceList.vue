@@ -4,8 +4,8 @@
     <hr>
     <b-field grouped>
       <b-field label="Şirket">
-        <v-select name="subordinate"
 
+        <v-select v-model="selectedCompanyList"
                   multiple
                   required
                   @input="makeSearch('company', $event)"
@@ -14,7 +14,7 @@
       </b-field>
 
       <b-field label="Avans Talep Durumu">
-          <b-select @input="makeSearch('advanceStatus', {id: $event.id, name: $event.name})" placeholder="Avans Talep Durumu Seçiniz" expanded>
+          <b-select v-model="selectedStatus" @input="makeSearch('status', {id: $event.id, name: $event.name})" placeholder="Avans Talep Durumu Seçiniz" expanded>
               <option :key="a.id" :value="a" v-for="a in advanceStatusList">{{a.name}}</option>
           </b-select>
       </b-field>
@@ -23,6 +23,7 @@
        <b-field label="Başlangıç Tarihi">
         <b-datepicker
             @input="makeSearch('requestStartDate', $event)"
+            v-model="startDate"
             placeholder="Başlangıç Tarihi"
             icon="calendar-today"
             :readonly="false">
@@ -31,6 +32,7 @@
 
       <b-field label="Bitiş Tarihi">
         <b-datepicker
+            v-model="endDate"
             @input="makeSearch('requestEndDate', $event)"
             placeholder="Bitiş Tarihi"
             icon="calendar-today"
@@ -76,6 +78,10 @@ import Create from '@/components/AdvanceList/Create'
 export default {
   data () {
     return {
+      selectedCompanyList: [],
+      startDate: null,
+      endDate: null,
+      selectedStatus: this.$store.state.advanceStatusList[0],
       warning: false,
       columnsTemplate: [
         { inner: 'status' },
@@ -91,9 +97,18 @@ export default {
     }
   },
   methods: {
+    cleanSearchQuery () {
+      this.$store.dispatch('advanceListSolution/cleanSearchQuery')
+        .then(() => {
+          console.log(this.selectedStatus)
+          this.selectedStatus = this.$store.state.advanceStatusList[0]
+          this.selectedCompanyList = []
+          this.startDate = null
+          this.endDate = null
+        })
+    },
     ...mapActions({
-      advanceSearch: 'advanceListSolution/advanceSearch',
-      cleanSearchQuery: 'advanceListSolution/cleanSearchQuery'
+      advanceSearch: 'advanceListSolution/advanceSearch'
     }),
 
     makeSearch (field, value) {

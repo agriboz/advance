@@ -6,18 +6,18 @@
 
         <section class="modal-card-body">
           <b-field label="%50 Oranında maaşımı avans olarak istiyorum ">
-            <b-switch :value="data.amountPercentage" @input="editAdvance('amountPercentage', $event)"  true-value="50" false-value="0"></b-switch>
+            <b-switch :value.sync="data.amountPercentage" @input="editAdvance('amountPercentage', $event)"  true-value="50" false-value="0"></b-switch>
           </b-field>
-
+{{$store.getters.disableAmount}}
           <b-field label="Avans Tutarı">
-            <b-input type="number" :value="data.amount" @input="editAdvance('amount', $event)"
-                      :disabled="disableAmount" placeholder="Avans Tutarı" required></b-input>
+            <b-input type="number" :value.sync="data.amount" @input="editAdvance('amount', $event)"
+            :disabled="$store.getters.disableAmount" placeholder="Avans Tutarı" required></b-input>
           </b-field>
         </section>
 
         <footer class="modal-card-foot align-end">
-          <button @click="updateAdvance(data)" class="button is-info">Talep Et</button>
-          <button class="button is-danger" @click="destroyAdvance(data)">İptal Et</button>
+          <button :disabled="disabled" @click="updateAdvance(data)" class="button is-info">Talep Et</button>
+          <button :disabled="disabled" class="button is-danger" @click="destroyAdvance(data)">İptal Et</button>
           <button class="button" type="button" @click="closeModal">Kapat</button>
         </footer>
     </div>
@@ -33,9 +33,6 @@ export default {
     },
     editAdvance (field, value) {
       this.$store.commit('editAdvance', {[field]: value})
-      if (field === 'amountPercentage') {
-        this.$store.commit('disableAmount')
-      }
     },
 
     async destroyAdvance (payload) {
@@ -50,13 +47,16 @@ export default {
     }
   },
   computed: {
+    disabled () {
+      return this.data.status.id === 5 || this.data.status.id === 7 || this.data.status.id === 11
+    },
     ...mapState({
       data: state => state.advanceRequest.selected,
       disableAmount: state => state.advanceRequest.disableAmount
     })
   },
   mounted () {
-    this.$store.commit('disableAmount')
+    this.editAdvance()
   }
 }
 </script>

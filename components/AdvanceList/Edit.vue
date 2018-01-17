@@ -20,7 +20,7 @@
         </b-field>
 
         <b-field label="Avans Tutarı">
-          <b-input type="number" :value="data.amount" @input="editAdvance('amount', $event)"  :disabled="disableAmount || data.status.id === 7" placeholder="Avans Tutarı" required></b-input>
+          <b-input type="number" :value="data.amount" @input="editAdvance('amount', $event)"  :disabled="$store.getters.disableAmount || data.status.id === 7" placeholder="Avans Tutarı" required></b-input>
         </b-field>
 
         <b-field style="margin-top:30px" label="SAP Sistemine Gönderildi mi?">
@@ -49,9 +49,6 @@ export default {
     },
     editAdvance (field, value) {
       this.$store.commit('editAdvance', {[field]: value})
-      if (field === 'amountPercentage') {
-        this.$store.commit('disableAmount')
-      }
     },
 
     destroyAdvance (payload) {
@@ -74,8 +71,8 @@ export default {
       return !!this.data.sapSendDate
     }
   },
-  created () {
-    this.$store.commit('disableAmount')
+  mounted () {
+    this.editAdvance()
   }
 }
 </script>

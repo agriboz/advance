@@ -30,11 +30,24 @@ const mutations = {
   },
 
   editAdvance (state, payload) {
-    Object.assign(state.advanceRequest.selected, payload)
+    console.log(state, payload)
+    state.advanceRequest.selected = Object.assign(state.advanceRequest.selected, payload)
+    if ((state.advanceRequest.selected.amountPercentage === '50') || (state.advanceRequest.selected.amountPercentage === 50)) {
+      state.advanceRequest.disableAmount = true
+    }
+    if ((state.advanceRequest.selected.amountPercentage === '0') || (state.advanceRequest.selected.amountPercentage === 0)) {
+      state.advanceRequest.disableAmount = false
+    }
   },
 
   updateAdvance (state, payload) {
     state.advanceRequest.data = state.advanceRequest.data.map(
+      item => (item.id === payload.id ? payload : item)
+    )
+  },
+
+  updateAdvanceManager (state, payload) {
+    state.advanceRequestManager.data = state.advanceRequestManager.data.map(
       item => (item.id === payload.id ? payload : item)
     )
   },
@@ -60,19 +73,13 @@ const mutations = {
       ownerEmployee,
       status
     })
-  },
-
-  disableAmount (state) {
-    // dirty check
-    if ((state.createAdvance.amountPercentage || state.advanceRequest.selected.amountPercentage) === 50 || (state.createAdvance.amountPercentage || state.advanceRequest.selected.amountPercentage) === '50') {
+    if ((state.createAdvance.amountPercentage === '50') || (state.createAdvance.amountPercentage === 50)) {
       state.advanceRequest.disableAmount = true
       state.createAdvance.amount = 0
-      state.advanceRequest.selected.amount = 0
     }
-    if ((state.createAdvance.amountPercentage || state.advanceRequest.selected.amountPercentage) === 0 || (state.createAdvance.amountPercentage || state.advanceRequest.selected.amountPercentage) === '0') {
+    if ((state.createAdvance.amountPercentage === '0') || (state.createAdvance.amountPercentage === 0)) {
       state.advanceRequest.disableAmount = false
       state.createAdvance.amount = 100
-      state.advanceRequest.selected.amount = 100
     }
   },
 

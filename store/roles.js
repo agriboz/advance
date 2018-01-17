@@ -28,7 +28,7 @@ const roles = {
   },
   actions: {
     async rolesSettings ({ commit }) {
-      const { data } = await this.$axios.get('role/1/employees')
+      const { data } = await this.$axios.get('role/5/employees')
       commit('settingsRoles', data)
     },
 
@@ -40,7 +40,7 @@ const roles = {
     async setRole ({ commit, state }) {
       const selectedEmployee = state.selectedEmployee
       const { status } = await this.$axios.post(`employee/role/${selectedEmployee.id}`, {
-        id: 1
+        id: 5
       })
 
       return status === 200

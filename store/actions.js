@@ -83,6 +83,16 @@ const actions = {
     return status === 200 ? commit('updateAdvance', payload) : null
   },
 
+  async updateAdvanceManager ({
+    commit,
+    state
+  }, payload) {
+    const {
+      status
+    } = await this.$axios.put(`advance/${payload.id}`, payload)
+    return status === 200 ? commit('updateAdvanceManager', payload) : null
+  },
+
   async destroyAdvance ({ commit, state }, payload) {
     const { status } = await this.$axios.post(`advance/cancel/`, [payload])
     return status === 200 ? commit('destroyAdvance', payload) : null

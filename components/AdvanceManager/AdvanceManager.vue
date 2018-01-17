@@ -40,6 +40,8 @@ export default {
     return {
       warning: false,
       columnsTemplate: [
+        { inner: 'status' },
+        { title: 'Talep Numarası', field: 'id' },
         { title: 'Sicil Numarası', field: 'registery' },
         { title: 'Personel Adı Soyadı', inner: 'employee' },
         { title: 'Avans Tutarı', field: 'amount' },

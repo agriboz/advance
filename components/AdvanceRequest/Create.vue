@@ -10,8 +10,9 @@
           </b-field>
 
           <b-field label="Avans Tutarı">
+{{$store.getters.disableAmount}}
 
-            <b-input type="number" min="100" :disabled="disableAmount"  @input="createAdvance('amount', $event)" :value="amount" placeholder="Avans Tutarı" required></b-input>
+            <b-input type="number" min="100" :disabled="$store.getters.disableAmount"  @input="createAdvance('amount', $event)" :value="amount" placeholder="Avans Tutarı" required></b-input>
           </b-field>
         </section>
         <footer class="modal-card-foot align-end">

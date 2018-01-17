@@ -17,11 +17,11 @@
        </b-field>
 
        <b-field style="margin-top:30px" label="%50 Oranında maaşımı avans olarak isteniyor">
-          <b-switch :disabled="disabled" :value="data.amountPercentage" @input="editAdvance('amountPercentage', $event)"  true-value="50" false-value="0"></b-switch>
+          <b-switch :disabled="disabled" :value.sync="data.amountPercentage" @input="editAdvance('amountPercentage', $event)"  true-value="50" false-value="0"></b-switch>
         </b-field>
-
+  {{$store.getters.disableAmount}}
         <b-field label="Avans Tutarı">
-          <b-input type="number" :value="data.amount" @input="editAdvance('amount', $event)"  :disabled="disableAmount" placeholder="Avans Tutarı" required></b-input>
+          <b-input type="number" :value.sync="data.amount" @input="editAdvance('amount', $event)"  :disabled="$store.getters.disableAmount" placeholder="Avans Tutarı" required></b-input>
         </b-field>
       </section>
       <footer class="modal-card-foot align-end">
@@ -42,9 +42,6 @@ export default {
     },
     editAdvance (field, value) {
       this.$store.commit('editAdvance', {[field]: value})
-      if (field === 'amountPercentage') {
-        this.$store.commit('disableAmount')
-      }
     },
 
     destroyAdvance (payload) {
@@ -53,7 +50,7 @@ export default {
     },
 
     updateAdvance (payload) {
-      this.$store.dispatch('updateAdvance', payload)
+      this.$store.dispatch('updateAdvanceManager', payload)
         .then(this.closeModal('edit'))
     }
   },
@@ -67,7 +64,7 @@ export default {
       disableAmount: state => state.advanceRequest.disableAmount
     }),
     mounted () {
-      this.$store.commit('disableAmount')
+      this.editAdvance()
     }
   }
 }

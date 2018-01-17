@@ -1,5 +1,5 @@
 import includes from 'lodash/includes'
-
+// sadece 5 varsa görmeyecek
 const getters = {
   menu (state) {
     const employeeRoles = state.employeeRoles
@@ -14,6 +14,10 @@ const getters = {
         if ((isManager || isSolutionCenter) && item.id === 3) {
           item.visible = true
         }
+        if ((employeeRoles[0] === 5) && item.id === 3) {
+          item.visible = false
+        }
+
         if (isSolutionCenter && (item.id === 5 || item.id === 4)) {
           item.visible = true
         }
@@ -24,6 +28,10 @@ const getters = {
 
   employee (state) {
     return state.employee
+  },
+
+  disableAmount (state) {
+    return state.advanceRequest.disableAmount
   },
 
   checkedRows (state) {

@@ -24,8 +24,7 @@
           </b-field>
 
           <b-field label="Avans Tutarı">
-
-            <b-input type="number" min="100" :disabled="disableAmount"  @input="createAdvance('amount', $event)" :value="amount" placeholder="Avans Tutarı" required></b-input>
+            <b-input type="number" min="100" :disabled="$store.getters.disableAmount"  @input="createAdvance('amount', $event)" :value="amount" placeholder="Avans Tutarı" required></b-input>
           </b-field>
         </section>
         <footer class="modal-card-foot align-end">
@@ -83,9 +82,6 @@ export default {
     },
     createAdvance (field, value) {
       this.$store.commit('createAdvance', {[field]: value})
-      if (field === 'amountPercentage') {
-        this.$store.commit('disableAmount')
-      }
     }
 
   }
