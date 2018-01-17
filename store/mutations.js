@@ -45,6 +45,10 @@ const mutations = {
     )
   },
 
+  canAdvanceEmployee (state, payload) {
+    state.advanceRequest.canAdvanceEmployee = payload
+  },
+
   createAdvance (state, payload) {
     const employee = state.employee
     const ownerEmployee = {

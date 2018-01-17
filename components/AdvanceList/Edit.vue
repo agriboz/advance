@@ -11,11 +11,10 @@
         </b-field>
         <b-field label="Personel Fotoğrafı">
           <p class="image is-64x64">
-            <img v-if="employeePhoto" :src="employeePhoto">
+            <img v-if="employeePhoto" :src="`data:image/png;base64, ${employeePhoto}`">
           </p>
         </b-field>
        </b-field>
-
         <b-field style="margin-top:30px" label="%50 Oranında maaşımı avans olarak isteniyor">
           <b-switch :disabled="data.status.id === 7" :value="data.amountPercentage" @input="editAdvance('amountPercentage', $event)"  true-value="50" false-value="0"></b-switch>
         </b-field>
@@ -57,29 +56,26 @@ export default {
 
     destroyAdvance (payload) {
       this.$store.dispatch('destroyAdvance', payload)
-      this.closeModal()
+        .then(this.closeModal())
     },
 
     updateAdvance (payload) {
       this.$store.dispatch('updateAdvance', payload)
-      this.closeModal()
+        .then(this.closeModal())
     }
   },
   computed: {
-    checkSendDate () {
-      return !!this.data.sapSendDate
-    },
-    employeePhoto () {
-      return `data:image/png;base64, ${this.employeeImage}`
-    },
     ...mapState({
-      employeeImage: state => state.manager.employeePhoto,
       data: state => state.advanceRequest.selected,
+      employeePhoto: state => state.advanceListSolution.employeePhoto,
       disableAmount: state => state.advanceRequest.disableAmount
     }),
-    mounted () {
-      this.$store.commit('disableAmount')
+    checkSendDate () {
+      return !!this.data.sapSendDate
     }
+  },
+  created () {
+    this.$store.commit('disableAmount')
   }
 }
 </script>

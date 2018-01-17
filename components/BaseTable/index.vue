@@ -30,6 +30,15 @@
                         </b-icon>
                       </b-tooltip>
                     </span>
+                    <span v-if="data.row[c.inner]['id'] === 3">
+                      <b-tooltip label="Talep Edildi">
+                        <b-icon
+                          type="is-info"
+                          icon="timer"
+                          size="is-medium">
+                        </b-icon>
+                      </b-tooltip>
+                    </span>
                     <span v-if="data.row[c.inner]['id'] === 11">
                       <b-tooltip label="SAP Transfer Hatası">
                         <b-icon

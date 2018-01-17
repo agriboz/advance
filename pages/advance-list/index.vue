@@ -9,13 +9,9 @@ import AdvanceList from '@/components/AdvanceList/AdvanceList'
 
 export default {
   middleware: 'authenticated',
-  async asyncData ({app, store, redirect}) {
+  async asyncData ({app, store}) {
     if (!store.state.employee) {
       await store.dispatch('employee')
-    }
-
-    if (!store.state.manager.employeePhoto) {
-      await store.dispatch('advanceListSolution/getEmployeePhoto')
     }
   },
   components: {

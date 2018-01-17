@@ -12,11 +12,8 @@
                        disabled></b-input>
             </b-field>
 
-            <b-field label="Gün"
-                     :type="errors.has('value') ? 'is-danger': ''"
-                     :message="errors.first('value')">
-              <b-input v-validate="'required|numeric'"
-                       name="value" :value="data.value"
+            <b-field label="Gün">
+              <b-input name="value" :value="data.value"
                        type="number"
                        @input="editSelectedKey('value', $event)"
                        placeholder="Value"></b-input>
@@ -35,7 +32,7 @@
 </template>
 
 <script>
-import {mapActions, mapState} from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   computed: {
@@ -46,13 +43,7 @@ export default {
 
   methods: {
     update (payload) {
-      this.$validator.validateAll().then((result) => {
-        if (result) {
-          return this.$store.dispatch('key/updateSelectedKey', payload)
-        }
-      }).catch(e => {
-        console.log(e)
-      })
+      return this.$store.dispatch('key/updateSelectedKey', payload)
     },
     editSelectedKey (field, value) {
       this.$store.commit('key/editSelectedKey', {

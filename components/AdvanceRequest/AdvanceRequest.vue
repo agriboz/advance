@@ -42,17 +42,36 @@ export default {
     }
   },
   methods: {
-    openModalCreate (create) {
-      this.$store.dispatch('advanceRequestOpenModal', create)
+    canAdvanceMessage () {
+      this.$toast.open({
+        message: 'Aktif avans talep ayı içerisinde avans talebiniz bulunduğu için işlem yapamazsınız.',
+        type: 'is-warning'
+      })
     },
-    edit (payload) {
-      this.$store.dispatch('editSelectedAdvance', payload)
-      this.$store.dispatch('advanceRequestOpenModal', 'edit')
+    async openModalCreate (create) {
+      await this.$store.dispatch('canAdvanceEmployee')
+      if (this.advanceRequest.canAdvanceEmployee) {
+        this.canAdvanceMessage()
+      } else {
+        await this.$store.dispatch('advanceRequestOpenModal', create)
+      }
+    },
+    async edit (payload) {
+      await this.$store.dispatch('canAdvanceEmployee')
+      if (this.advanceRequest.canAdvanceEmployee) {
+        this.canAdvanceMessage()
+      } else {
+        await this.$store.dispatch('editSelectedAdvance', payload)
+        await this.$store.dispatch('advanceRequestOpenModal', 'edit')
+      }
     }
   },
   computed: {
     ...mapState(['advanceRequest', 'employee', 'key']),
     ...mapGetters(['advanceRequestList'])
+  },
+  mounted () {
+
   },
   components: {
     BaseTable,

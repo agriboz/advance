@@ -11,7 +11,7 @@
         </b-field>
         <b-field label="Personel Fotoğrafı">
           <p class="image is-64x64">
-            <img v-if="employeePhoto" :src="employeePhoto">
+            <img v-if="employeePhoto" :src="`data:image/png;base64, ${employeePhoto}`">
           </p>
         </b-field>
        </b-field>
@@ -61,11 +61,8 @@ export default {
     disabled () {
       return this.data.status.id === 5 || this.data.status.id === 7 || this.data.status.id === 11
     },
-    employeePhoto () {
-      return `data:image/png;base64, ${this.employeeImage}`
-    },
     ...mapState({
-      employeeImage: state => state.manager.employeePhoto,
+      employeePhoto: state => state.advanceListSolution.employeePhoto,
       data: state => state.advanceRequest.selected,
       disableAmount: state => state.advanceRequest.disableAmount
     }),

@@ -34,6 +34,10 @@ const getters = {
     return state.advanceRequest.data
   },
 
+  selectedEmployee (state) {
+    return state.advanceRequest.selected
+  },
+
   advanceRequestListManager (state) {
     const {
       employeeRequested,

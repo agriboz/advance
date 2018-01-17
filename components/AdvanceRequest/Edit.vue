@@ -4,22 +4,22 @@
         <p class="modal-card-title">Avans Talep Et</p>
       </header>
 
-      <section class="modal-card-body">
-       <b-field label="%50 Oranında maaşımı avans olarak istiyorum ">
-          <b-switch :value="data.amountPercentage" @input="editAdvance('amountPercentage', $event)"  true-value="50" false-value="0"></b-switch>
-        </b-field>
+        <section class="modal-card-body">
+          <b-field label="%50 Oranında maaşımı avans olarak istiyorum ">
+            <b-switch :value="data.amountPercentage" @input="editAdvance('amountPercentage', $event)"  true-value="50" false-value="0"></b-switch>
+          </b-field>
 
-        <b-field label="Avans Tutarı">
-          <b-input type="number" :value="data.amount" @input="editAdvance('amount', $event)"
-                   :disabled="disableAmount" placeholder="Avans Tutarı" required></b-input>
-        </b-field>
-      </section>
+          <b-field label="Avans Tutarı">
+            <b-input type="number" :value="data.amount" @input="editAdvance('amount', $event)"
+                      :disabled="disableAmount" placeholder="Avans Tutarı" required></b-input>
+          </b-field>
+        </section>
 
-      <footer class="modal-card-foot align-end">
-        <button @click="updateAdvance(data)" class="button is-info">Talep Et</button>
-        <button class="button is-danger" @click="destroyAdvance(data)">İptal Et</button>
-        <button class="button" type="button" @click="closeModal">Kapat</button>
-      </footer>
+        <footer class="modal-card-foot align-end">
+          <button @click="updateAdvance(data)" class="button is-info">Talep Et</button>
+          <button class="button is-danger" @click="destroyAdvance(data)">İptal Et</button>
+          <button class="button" type="button" @click="closeModal">Kapat</button>
+        </footer>
     </div>
 </template>
 

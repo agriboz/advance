@@ -64,9 +64,11 @@ export default {
         : this.$store.dispatch('destroyAdvanceList')
     },
 
-    edit (payload) {
-      this.$store.dispatch('editSelectedAdvance', payload)
-      this.$store.dispatch('manager/openModal', 'edit')
+    async edit (payload) {
+      const employeeRegistry = payload.employee.registry
+      await this.$store.dispatch('editSelectedAdvance', payload)
+      await this.$store.dispatch('advanceListSolution/getEmployeePhoto', employeeRegistry)
+      await this.$store.dispatch('manager/openModal', 'edit')
     },
     openModalCreate () {
       this.$store.dispatch('manager/openModal', 'create')

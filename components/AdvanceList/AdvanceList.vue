@@ -4,13 +4,13 @@
     <hr>
     <b-field grouped>
       <b-field label="Şirket">
-        <v-select v-validate="'required'"
-                    name="subordinate"
-                    multiple
-                    required
-                    @input="makeSearch('company', $event)"
-                    :value.sync="selectedCompanies"
-                    :options="companies"></v-select>
+        <v-select name="subordinate"
+
+                  multiple
+                  required
+                  @input="makeSearch('company', $event)"
+                  :value.sync="selectedCompanies"
+                  :options="companies"></v-select>
       </b-field>
 
       <b-field label="Avans Talep Durumu">
@@ -59,7 +59,7 @@
     <b-message style="margin-top:20px" :active.sync="warning" title="Hata" type="is-danger">
         İptal olan yada SAP gönderilmiş veriye işlem yapamazsınız.
     </b-message>
-    <BaseTable :columns="columnsTemplate" v-if="data.length" :checkable="true" :edit="edit" :data="data"  :canEdit="true"></BaseTable>
+    <BaseTable :columns="columnsTemplate" v-if="data.length" :checkable="true" :edit="edit" :data="data" :canEdit="true"></BaseTable>
 
     <b-modal :active.sync="advanceListSolution.modal.edit" has-modal-card>
       <Edit></Edit>
@@ -117,11 +117,14 @@ export default {
         : this.$store.dispatch('advanceListSolution/sendToSap')
     },
 
-    edit (payload) {
-      this.$store.dispatch('editSelectedAdvance', payload)
-      this.$store.dispatch('advanceListSolution/openModal', 'edit')
+    async edit (payload) {
+      const employeeRegistry = payload.employee.registry
+      await Promise.all([
+        this.$store.dispatch('editSelectedAdvance', payload),
+        this.$store.dispatch('advanceListSolution/getEmployeePhoto', employeeRegistry)
+      ])
+      await this.$store.dispatch('advanceListSolution/openModal', 'edit')
     }
-
   },
   computed: {
     ...mapState({

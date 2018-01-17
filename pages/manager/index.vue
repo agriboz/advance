@@ -17,10 +17,6 @@ export default {
     if (!store.state.advanceRequestManager.data.length) {
       await store.dispatch('advanceRequestManager')
     }
-
-    if (!store.state.manager.employeePhoto) {
-      await store.dispatch('manager/getEmployeePhoto')
-    }
   },
   components: {
     AdvanceManager

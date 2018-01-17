@@ -21,7 +21,8 @@
             </div>
             <figure class="media-right employee-figure">
               <p class="image is-48x48">
-                <img class="employee-image" :src="employeeImage">
+                <img v-if="employee.image" class="employee-image" :src="`data:image/png;base64, ${employee.image}`">
+                <b-icon v-else icon="account-circle" size="is-large"></b-icon>
               </p>
             </figure>
           </div>
@@ -35,9 +36,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: {
-    employeeImage () {
-      return `data:image/png;base64, ${this.employee.image} `
-    },
+
     ...mapGetters(['employee'])
   }
 }

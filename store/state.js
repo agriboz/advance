@@ -17,6 +17,7 @@ const state = {
   advanceRequest: {
     data: [],
     selected: {},
+    canAdvanceEmployee: false,
     disableAmount: false,
     modal: {
       edit: false,

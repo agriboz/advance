@@ -6,8 +6,6 @@
       <form @submit.prevent="setAdvance($store.state.createAdvance)">
 
         <section class="modal-card-body">
-           {{$v}}
-           {{$v.subordinate.$error}}
           <b-field label="Personel Ad Soyad"
                       :type="$v.subordinate.$error ? 'is-danger' : ''"
                       :message="$v.subordinate.$error ? 'Zorunlu alan': ''">
@@ -19,7 +17,6 @@
                     @input="$v.subordinate.$touch(); createAdvance('employeeList', $event)"
                     :value.sync="selectedSubordinates"
                     :options="subordinates"></v-select>
-
         </b-field>
 
         <b-field label="%50 Oranında maaşımı avans olarak istiyorum">
@@ -99,5 +96,4 @@ export default {
 .v-select, .v-select .dropdown-toggle {
   width: 100%
 }
-
 </style>

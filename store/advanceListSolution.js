@@ -34,6 +34,10 @@ const advanceListSolution = {
 
     clearCheckedRows (state) {
       initialState.advanceList.checkedRows = []
+    },
+
+    employeePhoto (state, payload) {
+      state.employeePhoto = payload
     }
 
   },
@@ -44,6 +48,9 @@ const advanceListSolution = {
     },
     checkedRows (state, rootState, rootGetters) {
       return rootGetters.advanceList.checkedRows
+    },
+    selectedEmployeeRegistry (state, rootState, rootGetters) {
+      return rootGetters.advanceRequest.selected.registery
     }
   },
 
@@ -58,14 +65,12 @@ const advanceListSolution = {
       commit('cleanSearchQuery')
     },
 
-    async getEmployeePhoto ({commit, state, getters}) {
-      const employeeRegistry = getters.employee.registry
-
+    async getEmployeePhoto ({commit, state, getters}, paylaod) {
       const {
         data
-      } = await this.$axios.get(`employee/${employeeRegistry}/photo`)
+      } = await this.$axios.get(`employee/${paylaod}/photo`)
 
-      commit('employeePhoto', data)
+      await commit('employeePhoto', data)
     },
 
     async sendToSap ({ commit, state, getters }) {
