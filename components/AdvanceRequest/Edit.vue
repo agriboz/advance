@@ -35,11 +35,10 @@ export default {
       this.$store.commit('editAdvance', {[field]: value})
     },
 
-    destroyAdvance (payload) {
+    async destroyAdvance (payload) {
       console.log('hey')
-      this.$store.dispatch('destroyAdvance', payload)
-      /* this.$store.dispatch('advanceRequest')
-        .then(this.closeModal) */
+      await this.$store.dispatch('destroyAdvance', payload)
+      await this.$store.dispatch('advanceRequest')
     },
 
     updateAdvance (payload) {

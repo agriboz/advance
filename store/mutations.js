@@ -80,7 +80,6 @@ const mutations = {
     }
     if ((state.createAdvance.amountPercentage === '0') || (state.createAdvance.amountPercentage === 0)) {
       state.advanceRequest.disableAmount = false
-
     }
   },
 

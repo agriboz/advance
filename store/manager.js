@@ -31,7 +31,12 @@ const manager = {
   getters: {
     employee (state, rootState, rootGetters) {
       return rootGetters.employee
+    },
+
+    subordinates (state) {
+      return state.subordinates.filter(i => i.canDemandAdvance)
     }
+
   },
 
   actions: {

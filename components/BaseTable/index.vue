@@ -25,7 +25,7 @@
                       <b-tooltip label="Değerlendiriliyor">
                         <b-icon
                           type="is-info"
-                          icon="dna"
+                          icon="timer"
                           size="is-medium">
                         </b-icon>
                       </b-tooltip>

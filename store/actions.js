@@ -49,6 +49,19 @@ const actions = {
     commit('canAdvanceEmployee', data)
   },
 
+  async canAdvanceEmployeeManager ({
+    commit,
+    dispatch,
+    state,
+    router
+  }) {
+    const employeeId = state.employee.id
+    const {
+      data
+    } = await this.$axios.get(`canAdvanceEmployee/${employeeId}`)
+    commit('canAdvanceEmployee', data)
+  },
+
   async advanceRequestManager ({ commit, dispatch, state, router }) {
     const employeeId = state.employee.id
     const { data } = await this.$axios.get(`advance/manager/${employeeId}/search`)

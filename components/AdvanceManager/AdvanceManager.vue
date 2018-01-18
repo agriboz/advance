@@ -2,6 +2,10 @@
   <div>
     <h1 class="title is-size-4">Bağlı Çalışan İçin Avans Talepleri</h1>
     <hr>
+
+    <b-message v-if="employee.canDemandAdvance && (employee.canDemandAdvanceInCurrentDay === false)" type="is-warning" has-icon>
+          Bulunduğunuz tarihte avans girişi yapılmamaktadır. Ayın {{key.data[1].value}} - {{key.data[0].value}} günleri arasında avans girişi yapılabilmektedir.
+    </b-message>
     <div class="is-clearfix">
       <div class="field is-grouped is-pulled-right is-clearfix">
         <div class="control">
@@ -10,7 +14,7 @@
                   :disabled="!this.$store.state.advanceList.checkedRows.length" class="button is-danger">Talepleri İptal Et</button>
         </div>
         <div class="control">
-          <button @click="openModalCreate('create')" class="button is-info">Bağlı Çalışan İçin Avans Talebi Ekle</button>
+          <button v-if="employee.canDemandAdvance && employee.canDemandAdvanceInCurrentDay"  @click="openModalCreate('create')" class="button is-info">Bağlı Çalışan İçin Avans Talebi Ekle</button>
         </div>
       </div>
     </div>
@@ -82,6 +86,8 @@ export default {
       data: 'advanceRequestListManager'
     }),
     ...mapState({
+      employee: state => state.employee,
+      key: state => state.key,
       manager: state => state.manager
     })
   },

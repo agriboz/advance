@@ -9,7 +9,6 @@
           <b-field label="Personel Ad Soyad"
                       :type="$v.subordinate.$error ? 'is-danger' : ''"
                       :message="$v.subordinate.$error ? 'Zorunlu alan': ''">
-
           <v-select v-model="subordinate"
                     name="subordinate"
                     multiple
@@ -37,7 +36,7 @@
 
 <script>
 import vSelect from 'vue-select'
-import {mapState} from 'vuex'
+import {mapState, mapGetters} from 'vuex'
 import { required, minLength } from 'vuelidate/lib/validators'
 
 export default {
@@ -58,9 +57,9 @@ export default {
   },
 
   computed: {
+    ...mapGetters({subordinates: 'manager/subordinates'}),
     ...mapState({
       selectedSubordinates: state => state.manager.selectedSubordinates,
-      subordinates: state => state.manager.subordinates,
       amount: state => state.createAdvance.amount,
       amountPercentage: state => state.createAdvance.amountPercentage,
       disableAmount: state => state.advanceRequest.disableAmount
@@ -81,6 +80,10 @@ export default {
       await this.$store.dispatch('advanceRequestManager', payload)
     },
     createAdvance (field, value) {
+      if ((field === 'employeeList') && this.subordinate.length) {
+        console.log('d')
+        this.$store.dispatch('canAdvanceEmployeeManager')
+      }
       this.$store.commit('createAdvance', {[field]: value})
     }
 
