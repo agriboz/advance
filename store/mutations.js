@@ -34,6 +34,7 @@ const mutations = {
     state.advanceRequest.selected = Object.assign(state.advanceRequest.selected, payload)
     if ((state.advanceRequest.selected.amountPercentage === '50') || (state.advanceRequest.selected.amountPercentage === 50)) {
       state.advanceRequest.disableAmount = true
+      state.advanceRequest.selected.amount = 0
     }
     if ((state.advanceRequest.selected.amountPercentage === '0') || (state.advanceRequest.selected.amountPercentage === 0)) {
       state.advanceRequest.disableAmount = false
@@ -79,7 +80,7 @@ const mutations = {
     }
     if ((state.createAdvance.amountPercentage === '0') || (state.createAdvance.amountPercentage === 0)) {
       state.advanceRequest.disableAmount = false
-      state.createAdvance.amount = 100
+
     }
   },
 

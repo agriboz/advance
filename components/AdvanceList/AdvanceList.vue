@@ -12,7 +12,6 @@
                   :value.sync="selectedCompanies"
                   :options="companies"></v-select>
       </b-field>
-
       <b-field label="Avans Talep Durumu">
           <b-select v-model="selectedStatus" @input="makeSearch('status', {id: $event.id, name: $event.name})" placeholder="Avans Talep Durumu Seçiniz" expanded>
               <option :key="a.id" :value="a" v-for="a in advanceStatusList">{{a.name}}</option>
@@ -81,7 +80,7 @@ export default {
       selectedCompanyList: [],
       startDate: null,
       endDate: null,
-      selectedStatus: this.$store.state.advanceStatusList[0],
+      selectedStatus: null,
       warning: false,
       columnsTemplate: [
         { inner: 'status' },
@@ -151,9 +150,10 @@ export default {
       data: state => state.advanceListSolution.data
     })
   },
-  mounted () {
-    this.$store.dispatch('companies')
-    this.$store.dispatch('advanceStatusList')
+  async mounted () {
+    await this.$store.dispatch('companies')
+    await this.$store.dispatch('advanceStatusList')
+    this.selectedStatus = this.$store.state.advanceStatusList[0]
   },
   components: {
     vSelect,
