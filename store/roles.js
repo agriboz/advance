@@ -37,14 +37,14 @@ const roles = {
       commit('searchEmployee', data)
     },
 
-    async setRole ({ commit, state }) {
+    async setRole ({ commit, dispatch, state }) {
       const selectedEmployee = state.selectedEmployee
       const { status } = await this.$axios.post(`employee/role/${selectedEmployee.id}`, {
         id: 5
       })
 
       return status === 200
-        ? commit('settingsAddRoles', selectedEmployee)
+        ? dispatch('rolesSettings')
         : null
     },
 

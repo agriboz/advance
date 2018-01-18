@@ -42,7 +42,7 @@ export default {
       columnsTemplate: [
         { inner: 'status' },
         { title: 'Talep Numarası', field: 'id' },
-        { title: 'Sicil Numarası', field: 'registery' },
+        { title: 'Sicil Numarası', innerId: 'employee' },
         { title: 'Personel Adı Soyadı', inner: 'employee' },
         { title: 'Avans Tutarı', field: 'amount' },
         { title: '50% mi', field: 'amountPercentage' },
@@ -64,6 +64,7 @@ export default {
       this.checkRowsStatus().length
         ? this.warning = true
         : this.$store.dispatch('destroyAdvanceList')
+          .then(this.$store.getters('advanceRequestListManager'))
     },
 
     async edit (payload) {

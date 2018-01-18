@@ -99,17 +99,18 @@ export default {
   methods: {
     cleanSearchQuery () {
       this.$store.dispatch('advanceListSolution/cleanSearchQuery')
-        .then(() => {
-          console.log(this.selectedStatus)
-          this.selectedStatus = this.$store.state.advanceStatusList[0]
-          this.selectedCompanyList = []
-          this.startDate = null
-          this.endDate = null
-        })
+        .then(this.clearSearchFields)
     },
     ...mapActions({
       advanceSearch: 'advanceListSolution/advanceSearch'
     }),
+
+    clearSearchFields () {
+      this.selectedStatus = this.$store.state.advanceStatusList[0]
+      this.selectedCompanyList = []
+      this.startDate = null
+      this.endDate = null
+    },
 
     makeSearch (field, value) {
       this.$store.commit('advanceListSolution/makeSearch', {

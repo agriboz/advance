@@ -14,7 +14,7 @@
             :default-sort-direction="ui.tableOpts.defaultSortDirection">
 
             <template slot-scope="data">
-                <b-table-column v-for="(c,i) in columns"   :inner="c.inner" :field="c.field"  :label="c.title"  :key="i">
+                <b-table-column v-for="(c,i) in columns" :innerId="c.innerId"  :inner="c.inner" :field="c.field"  :label="c.title"  :key="i">
                   <span v-if="c.field === 'amountPercentage'">%</span>
                   {{ data.row[c.field] }}
 
@@ -67,7 +67,12 @@
                         </b-tooltip>
                       </span>
                     </span>
+
+
+
                   <span v-if="c.inner === 'employee'">{{data.row[c.inner]['name']}}</span>
+                  <span v-if="c.innerId === 'employee'">{{data.row[c.innerId]['registry']}}</span>
+
                   <span v-if="c.inner === 'currency'">{{data.row[c.inner]['name']}}</span>
                   <!-- <span v-if="data.row[c.field]['name']">{{data.row[c.field]['name']}}</span> -->
                   <span v-if="c.inner === 'requestDate'">{{new Date(data.row[c.inner]).toLocaleDateString()}}</span>

@@ -19,9 +19,8 @@
        <b-field style="margin-top:30px" label="%50 Oranında maaşımı avans olarak isteniyor">
           <b-switch :disabled="disabled" :value.sync="data.amountPercentage" @input="editAdvance('amountPercentage', $event)"  true-value="50" false-value="0"></b-switch>
         </b-field>
-  {{$store.getters.disableAmount}}
         <b-field label="Avans Tutarı">
-          <b-input type="number" :value.sync="data.amount" @input="editAdvance('amount', $event)"  :disabled="$store.getters.disableAmount" placeholder="Avans Tutarı" required></b-input>
+          <b-input type="number" min="100" :value.sync="data.amount" @input="editAdvance('amount', $event)"  :disabled="$store.getters.disableAmount" placeholder="Avans Tutarı" required></b-input>
         </b-field>
       </section>
       <footer class="modal-card-foot align-end">
@@ -44,9 +43,10 @@ export default {
       this.$store.commit('editAdvance', {[field]: value})
     },
 
-    destroyAdvance (payload) {
-      this.$store.dispatch('destroyAdvance', payload)
-        .then(this.closeModal('edit'))
+    async destroyAdvance (payload) {
+      await this.$store.dispatch('destroyAdvance', payload)
+      await this.$store.dispatch('advanceRequestManager')
+      await this.closeModal('edit')
     },
 
     updateAdvance (payload) {

@@ -53,12 +53,12 @@ export default {
 
     destroyAdvance (payload) {
       this.$store.dispatch('destroyAdvance', payload)
-        .then(this.closeModal())
+        .then(this.closeModal)
     },
 
     updateAdvance (payload) {
       this.$store.dispatch('updateAdvance', payload)
-        .then(this.closeModal())
+        .then(this.closeModal)
     }
   },
   computed: {

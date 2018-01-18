@@ -119,7 +119,7 @@ const actions = {
     const payload = state.advanceList.checkedRows
 
     const { status } = await this.$axios.post(`advance/cancel/`, payload)
-    return status === 200 ? dispatch('advanceRequest') : null
+    return status === 200 ? dispatch('advanceRequestManager') : null
   }
 }
 
