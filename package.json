@@ -29,6 +29,7 @@
     "lodash": "^4.17.4",
     "nuxt": "^1.0.0-rc9",
     "vue": "^2.5.3",
+    "vue-json-excel": "^0.1.7",
     "vue-select": "github:sagalbot/vue-select",
     "vue-server-renderer": "^2.5.3",
     "vue-template-compiler": "2.5.3",

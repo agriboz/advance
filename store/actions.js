@@ -1,8 +1,9 @@
 import axios from 'axios'
 import values from 'lodash/values'
+
 const actions = {
-  async browserInit  ({ commit }) {
-    const { data } = await axios.get('http://10.10.27.36:8181/adv/v1/employee', { withCredentials: true })
+  async browserInit ({ commit }) {
+    const { data } = await axios.get('http://10.10.27.36:8181/adv/v2/employee', { withCredentials: true })
     commit('employee', data)
     commit('employeeRoles', values(data.roles))
   },
@@ -39,8 +40,10 @@ const actions = {
 
   async advanceRequest ({ commit, dispatch, state, router }) {
     const employeeId = state.employee.id
-    const { data } = await this.$axios.get(`advance/${employeeId}/search`)
-    commit('advanceRequest', data)
+    if (employeeId) {
+      const { data } = await this.$axios.get(`advance/${employeeId}/search`)
+      commit('advanceRequest', data)
+    }
   },
 
   async canAdvanceEmployee ({ commit, dispatch, state, router }) {

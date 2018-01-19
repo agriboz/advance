@@ -56,7 +56,13 @@
         </div>
       </div>
     </div>
-
+    <download-excel
+        class   = "button is-info"
+        :data   = "advanceRequestList"
+        :fields = "this.fields"
+        name    = "avanslar.xls">
+        Excel'e Aktar
+    </download-excel>
     <b-message style="margin-top:20px" :active.sync="warning" title="Hata" type="is-danger">
         İptal olan yada SAP gönderilmiş veriye işlem yapamazsınız.
     </b-message>
@@ -75,8 +81,12 @@ import Edit from '@/components/AdvanceList/Edit'
 import Create from '@/components/AdvanceList/Create'
 
 export default {
+
   data () {
     return {
+      fields: {
+        'Talep Durumu': 'status.name'
+      },
       selectedCompanyList: [],
       startDate: null,
       endDate: null,
