@@ -42,7 +42,7 @@ module.exports = {
     } */
   },
   loading: { color: '#3B8070' },
-  plugins: ['~/plugins/buefy', '~/plugins/axios', '~/plugins/vuelidate'],
+  plugins: ['~/plugins/buefy', '~/plugins/axios', '~/plugins/vuelidate', '~/plugins/excel'],
   css: ['animate.css/animate.min.css', 'node_modules/buefy/lib/buefy.min.css'],
   router: {
     linkActiveClass: 'is-active'

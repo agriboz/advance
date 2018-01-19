@@ -46,6 +46,15 @@
         <div class="control" style="margin-top:32px">
           <button @click="cleanSearchQuery" class="button is-primary">Kriterleri Temizle</button>
         </div>
+        <div class="control" style="margin-top:32px" v-if="data.length">
+          <download-excel
+              class   = "button is-success"
+              :data   = "data"
+              :fields = "this.fields"
+              name    = "avanslar.xls">
+              Excel'e Aktar
+          </download-excel>
+        </div>
        </div>
 
     </b-field>
@@ -56,13 +65,7 @@
         </div>
       </div>
     </div>
-    <download-excel
-        class   = "button is-info"
-        :data   = "advanceRequestList"
-        :fields = "this.fields"
-        name    = "avanslar.xls">
-        Excel'e Aktar
-    </download-excel>
+
     <b-message style="margin-top:20px" :active.sync="warning" title="Hata" type="is-danger">
         İptal olan yada SAP gönderilmiş veriye işlem yapamazsınız.
     </b-message>
@@ -81,11 +84,18 @@ import Edit from '@/components/AdvanceList/Edit'
 import Create from '@/components/AdvanceList/Create'
 
 export default {
-
   data () {
     return {
       fields: {
-        'Talep Durumu': 'status.name'
+        'Talep Durumu': 'status.name',
+        'Talep Numarası': 'id',
+        'Sicil Numarası': 'employee.registry',
+        'Personel Adı Soyadı': 'employee.name',
+        'Avans Tutarı': 'amount',
+        '50%': 'amountPercentage',
+        'Avans Talep Tarihi': 'requestDate',
+        'SAP Gönderildi': 'sapSendDate',
+        'SAP Açıklaması': 'description'
       },
       selectedCompanyList: [],
       startDate: null,
