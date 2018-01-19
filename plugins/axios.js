@@ -42,7 +42,6 @@ export default function ({ app: { $axios, router, store } }, inject) {
       return config
     },
     error => {
-      console.log(error)
       return Promise.reject(error)
     }
   )

@@ -27,10 +27,15 @@ module.exports = {
     ]
   },
   modules: ['@nuxtjs/axios'],
+  env: {
+    baseUrl: process.env.NODE_ENV === 'development'
+      ? 'http://10.10.27.36:8181/adv/v1/'
+      : 'http://10.10.27.36:8181/adv/v2/'
+  },
   axios: {
     baseURL:
       process.env.NODE_ENV === 'production'
-        ? 'http://10.10.27.36:8181/adv/v1/'
+        ? 'http://10.10.27.36:8181/adv/v2/'
         : 'http://10.10.27.36:8181/adv/v1/'
     /* ,
     errorHandler (errorReason, { error }) {

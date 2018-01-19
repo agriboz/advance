@@ -3,7 +3,13 @@ import values from 'lodash/values'
 
 const actions = {
   async browserInit ({ commit }) {
-    const { data } = await axios.get('http://10.10.27.36:8181/adv/v2/employee', { withCredentials: true })
+    console.log(process.env.baseUrl)
+    const {
+      data
+    } = await axios.get(`${process.env.baseUrl}employee`, {
+      withCredentials: true
+    })
+
     commit('employee', data)
     commit('employeeRoles', values(data.roles))
   },
