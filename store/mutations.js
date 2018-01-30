@@ -30,7 +30,6 @@ const mutations = {
   },
 
   editAdvance (state, payload) {
-    console.log(state, payload)
     state.advanceRequest.selected = Object.assign(state.advanceRequest.selected, payload)
     if ((state.advanceRequest.selected.amountPercentage === '50') || (state.advanceRequest.selected.amountPercentage === 50)) {
       state.advanceRequest.disableAmount = true
@@ -49,6 +48,12 @@ const mutations = {
 
   updateAdvanceManager (state, payload) {
     state.advanceRequestManager.data = state.advanceRequestManager.data.map(
+      item => (item.id === payload.id ? payload : item)
+    )
+  },
+
+  updateAdvanceListSolution (state, payload) {
+    state.advanceListSolution.data = state.advanceListSolution.data.map(
       item => (item.id === payload.id ? payload : item)
     )
   },
@@ -101,7 +106,7 @@ const mutations = {
 
   checkedRows (state, payload) {
     state.advanceList.checkedRows = payload
-  }
+  },
 
   /* destroyAdvanceList (state, payload) {
     const stated = state.advanceList.checkedRows
@@ -109,6 +114,10 @@ const mutations = {
       !stated.includes(item)
     )
   } */
+  canMakeAdvanceRequest (state, payload) {
+    state.canMakeAdvanceRequest = payload
+  }
+
 }
 
 export default mutations

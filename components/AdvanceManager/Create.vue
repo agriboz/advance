@@ -18,6 +18,10 @@
                     :options="subordinates"></v-select>
         </b-field>
 
+        <b-message v-if="canMakeAdvanceRequest && this.subordinate.length" type="is-warning" has-icon>
+          Seçili personelin içeride avans kaydı bulunduğu için avans kaydı oluşturamazsınız.
+        </b-message>
+
         <b-field label="%50 Oranında maaşımı avans olarak istiyorum">
             <b-switch :value="amountPercentage" true-value="50" false-value="0" @input="createAdvance('amountPercentage', $event)"></b-switch>
           </b-field>
@@ -59,6 +63,7 @@ export default {
   computed: {
     ...mapGetters({subordinates: 'manager/subordinates'}),
     ...mapState({
+      canMakeAdvanceRequest: state => state.canMakeAdvanceRequest,
       selectedSubordinates: state => state.manager.selectedSubordinates,
       amount: state => state.createAdvance.amount,
       amountPercentage: state => state.createAdvance.amountPercentage,
@@ -81,8 +86,9 @@ export default {
     },
     createAdvance (field, value) {
       if ((field === 'employeeList') && this.subordinate.length) {
-        console.log('d')
-        this.$store.dispatch('canAdvanceEmployeeManager')
+        const checkEmployee = [...this.subordinate].pop()
+        console.log(checkEmployee)
+        this.$store.dispatch('canAdvanceEmployeeManager', checkEmployee.id)
       }
       this.$store.commit('createAdvance', {[field]: value})
     }

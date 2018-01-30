@@ -3,7 +3,6 @@ import values from 'lodash/values'
 
 const actions = {
   async browserInit ({ commit }) {
-    console.log(process.env.baseUrl)
     const {
       data
     } = await axios.get(`${process.env.baseUrl}employee`, {
@@ -23,8 +22,7 @@ const actions = {
   },
 
   async companies ({
-    commit,
-    state
+    commit
   }) {
     const {
       data
@@ -33,8 +31,7 @@ const actions = {
   },
 
   async advanceStatusList ({
-    commit,
-    state
+    commit
   }) {
     const {
       data
@@ -44,7 +41,7 @@ const actions = {
 
   // Advance Request
 
-  async advanceRequest ({ commit, dispatch, state, router }) {
+  async advanceRequest ({ commit, state }) {
     const employeeId = state.employee.id
     if (employeeId) {
       const { data } = await this.$axios.get(`advance/${employeeId}/search`)
@@ -52,40 +49,31 @@ const actions = {
     }
   },
 
-  async canAdvanceEmployee ({ commit, dispatch, state, router }) {
+  async canAdvanceEmployee ({ commit, state }) {
     const employeeId = state.employee.id
     const { data } = await this.$axios.get(`canAdvanceEmployee/${employeeId}`)
     commit('canAdvanceEmployee', data)
   },
 
-  async canAdvanceEmployeeManager ({
-    commit,
-    dispatch,
-    state,
-    router
-  }) {
-    const employeeId = state.employee.id
-    const {
-      data
-    } = await this.$axios.get(`canAdvanceEmployee/${employeeId}`)
-    commit('canAdvanceEmployee', data)
+  async canAdvanceEmployeeManager ({ commit }, payload) {
+    const data = await this.$axios.get(`canAdvanceEmployee/${payload}`)
+    return data ? commit('canMakeAdvanceRequest', data.data) : null
   },
 
-  async advanceRequestManager ({ commit, dispatch, state, router }) {
+  async advanceRequestManager ({ commit, state }) {
     const employeeId = state.employee.id
     const { data } = await this.$axios.get(`advance/manager/${employeeId}/search`)
     commit('advanceRequestManager', data)
   },
 
-  editSelectedAdvance ({ commit, state }, payload) {
+  editSelectedAdvance ({ commit }, payload) {
     commit('editSelectedAdvance', payload)
   },
 
   async setAdvance ({ commit, dispatch, state }, payload) {
-    console.log(payload)
-    const { status } = await this.$axios.post(payload.url, payload.data)
+    const { data } = await this.$axios.post(payload.url, payload.data)
 
-    return status === 200
+    return data
       ? dispatch('advanceRequest').then(() => {
         commit('manager/openModal', 'create')
         state.createAdvance = {
@@ -96,18 +84,17 @@ const actions = {
       : null
   },
 
-  editAdvance ({ commit, state }, payload) {
+  editAdvance ({ commit }, payload) {
     commit('editAdvance', payload)
   },
 
-  async updateAdvance ({ commit, state }, payload) {
-    const { status } = await this.$axios.put(`advance/${payload.id}`, payload)
-    return status === 200 ? commit('updateAdvance', payload) : null
+  async updateAdvance ({ commit }, payload) {
+    const { status, data } = await this.$axios.put(`advance/${payload.id}`, payload)
+    return status === 200 ? commit('updateAdvanceListSolution', data) : null
   },
 
   async updateAdvanceManager ({
-    commit,
-    state
+    commit
   }, payload) {
     const {
       status
@@ -115,29 +102,29 @@ const actions = {
     return status === 200 ? commit('updateAdvanceManager', payload) : null
   },
 
-  async destroyAdvance ({ commit, state }, payload) {
+  async destroyAdvance ({ commit }, payload) {
     const { status } = await this.$axios.post(`advance/cancel/`, [payload])
     return status === 200 ? commit('destroyAdvance', payload) : null
   },
 
-  createAdvance ({ commit, state }, payload) {
+  createAdvance ({ commit }, payload) {
     commit('createAdvance', payload)
   },
 
   // Sidebar Employee
-  async employee ({commit, state}) {
+  async employee ({commit}) {
     const { data } = await this.$axios.get(`employee`)
     commit('employee', data)
   },
 
   // Advance List
-  async advanceList ({ commit, dispatch, state, router }) {
+  async advanceList ({ commit, state }) {
     const employee = {id: state.employee.id}
     const { data } = await this.$axios.post(`advance/search`, {employee})
     commit('advanceList', data)
   },
 
-  async destroyAdvanceList ({ commit, dispatch, state }) {
+  async destroyAdvanceList ({ dispatch, state }) {
     const payload = state.advanceList.checkedRows
 
     const { status } = await this.$axios.post(`advance/cancel/`, payload)

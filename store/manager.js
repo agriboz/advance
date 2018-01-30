@@ -44,7 +44,7 @@ const manager = {
       commit('openModal', type)
     },
 
-    async getEmployeePhoto ({commit, state, getters}) {
+    async getEmployeePhoto ({commit, getters}) {
       const employeeRegistry = getters.employee.registry
 
       const {
@@ -54,7 +54,7 @@ const manager = {
       commit('employeePhoto', data)
     },
 
-    async getSubordinates ({ commit, state, getters, dispatch }) {
+    async getSubordinates ({ commit, getters }) {
       const employeeId = getters.employee.id
       const {
         data

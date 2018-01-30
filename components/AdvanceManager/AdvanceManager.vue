@@ -3,8 +3,11 @@
     <h1 class="title is-size-4">Bağlı Çalışan İçin Avans Talepleri</h1>
     <hr>
 
-    <b-message v-if="employee.canDemandAdvance && (employee.canDemandAdvanceInCurrentDay === false)" type="is-warning" has-icon>
-          Bulunduğunuz tarihte avans girişi yapılmamaktadır. Ayın {{key.data[1].value}} - {{key.data[0].value}} günleri arasında avans girişi yapılabilmektedir.
+    <b-message v-if="!employee.canDemandAdvanceInCurrentDay" type="is-warning" has-icon>
+          Bulunduğunuz tarihte avans girişi yapılmamaktadır. Ayın <strong>{{key.data[1].value}} - {{key.data[0].value}}</strong> günleri arasında avans girişi yapılabilmektedir.
+    </b-message>
+    <b-message type="is-warning" has-icon>
+          İlgili ayda işe giren çalışanlarınız avans alamayacağı için bağlı çalışan listesinde yer almaz.
     </b-message>
     <div class="is-clearfix">
       <div class="field is-grouped is-pulled-right is-clearfix">
@@ -14,7 +17,7 @@
                   :disabled="!this.$store.state.advanceList.checkedRows.length" class="button is-danger">Talepleri İptal Et</button>
         </div>
         <div class="control">
-          <button v-if="employee.canDemandAdvance && employee.canDemandAdvanceInCurrentDay"  @click="openModalCreate('create')" class="button is-info">Bağlı Çalışan İçin Avans Talebi Ekle</button>
+          <button v-if="employee.canDemandAdvanceInCurrentDay"  @click="openModalCreate('create')" class="button is-info">Bağlı Çalışan İçin Avans Talebi Ekle</button>
         </div>
       </div>
     </div>

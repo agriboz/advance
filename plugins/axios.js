@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 const { $toast } = Vue.prototype
 
-export default function ({ app: { $axios, router, store } }, inject) {
+export default function ({ app: { $axios, store } }) {
   $axios.interceptors.response.use(
     response => {
       if (response.status === 200 && response.config.method !== 'get') {
@@ -13,6 +13,7 @@ export default function ({ app: { $axios, router, store } }, inject) {
           message: 'İşlem Başarılı'
         })
       }
+
       store.state.ui.tableOpts.isLoading = false
       return response
     },

@@ -39,11 +39,11 @@ const key = {
       commit('setSelectedKey')
     },
 
-    editSelectedKey ({ commit, state }, payload) {
+    editSelectedKey ({ commit }, payload) {
       commit('editSelectedKey', payload)
     },
 
-    async updateSelectedKey ({ commit, dispatch, state }, payload) {
+    async updateSelectedKey ({ commit, dispatch }, payload) {
       await this.$axios.put(`appsettings/${payload.key}`, payload)
       await commit('keyOpenEditModal')
       await dispatch('keySettings')

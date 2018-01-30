@@ -5,7 +5,7 @@
     <b-field grouped>
       <b-field label="Şirket">
 
-        <v-select v-model="selectedCompanyList"
+        <v-select style="width: 300px" v-model="selectedCompanyList"
                   multiple
                   required
                   @input="makeSearch('company', $event)"
@@ -13,9 +13,13 @@
                   :options="companies"></v-select>
       </b-field>
       <b-field label="Avans Talep Durumu">
-          <b-select v-model="selectedStatus" @input="makeSearch('status', {id: $event.id, name: $event.name})" placeholder="Avans Talep Durumu Seçiniz" expanded>
-              <option :key="a.id" :value="a" v-for="a in advanceStatusList">{{a.name}}</option>
-          </b-select>
+
+        <v-select style="width: 300px" v-model="selectedStatusList"
+                  multiple
+                  required
+                  @input="makeSearch('status', $event)"
+                  :value.sync="selectedStatus"
+                  :options="advanceStatusList"></v-select>
       </b-field>
     </b-field>
     <b-field grouped>
@@ -95,12 +99,12 @@ export default {
         '50%': 'amountPercentage',
         'Avans Talep Tarihi': 'requestDate',
         'SAP Gönderildi': 'sapSendDate',
-        'SAP Açıklaması': 'description'
+        'SAP Açıklaması': 'sapMessage'
       },
       selectedCompanyList: [],
+      selectedStatusList: [],
       startDate: null,
       endDate: null,
-      selectedStatus: null,
       warning: false,
       columnsTemplate: [
         { inner: 'status' },
@@ -125,13 +129,14 @@ export default {
     }),
 
     clearSearchFields () {
-      this.selectedStatus = this.$store.state.advanceStatusList[0]
       this.selectedCompanyList = []
+      this.selectedStatusList = []
       this.startDate = null
       this.endDate = null
     },
 
     makeSearch (field, value) {
+      console.log(field, value)
       this.$store.commit('advanceListSolution/makeSearch', {
         [field]: value
       })
@@ -163,6 +168,7 @@ export default {
   },
   computed: {
     ...mapState({
+      selectedStatus: state => state.advanceListSolution.selectedStatus,
       selectedCompanies: state => state.advanceListSolution.selectedCompanies,
       advanceStatusList: state => state.advanceStatusList,
       advanceListSolution: state => state.advanceListSolution,
@@ -173,7 +179,6 @@ export default {
   async mounted () {
     await this.$store.dispatch('companies')
     await this.$store.dispatch('advanceStatusList')
-    this.selectedStatus = this.$store.state.advanceStatusList[0]
   },
   components: {
     vSelect,
@@ -183,3 +188,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.dropdown-toggle {
+  width: 100%
+}
+</style>

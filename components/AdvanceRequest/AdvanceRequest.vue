@@ -13,7 +13,8 @@
       <a @click="openModalCreate('create')"
          class="button is-info is-pulled-right">Yeni Avans Ekle</a>
     </div>
-    <BaseTable :columns="columnsTemplate" :canEdit="true" :edit="edit" :data="advanceRequestList"></BaseTable>
+
+    <BaseTable :columns="columnsTemplate" v-if="advanceRequestList" :canEdit="true" :edit="edit" :data="advanceRequestList"></BaseTable>
 
     <b-modal :active.sync="advanceRequest.modal.create" has-modal-card>
       <Create></Create>
@@ -64,6 +65,10 @@ export default {
   computed: {
     ...mapState(['advanceRequest', 'employee', 'key']),
     ...mapGetters(['advanceRequestList'])
+  },
+  async mounted () {
+    await this.$store.dispatch('employee')
+    await this.$store.dispatch('advanceRequest')
   },
   components: {
     BaseTable,

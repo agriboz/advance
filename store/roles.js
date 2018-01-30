@@ -32,12 +32,12 @@ const roles = {
       commit('settingsRoles', data)
     },
 
-    async searchEmployee ({ commit, state }, payload) {
+    async searchEmployee ({ commit }, payload) {
       const { data } = await this.$axios.get(`employee/search/${payload}`)
       commit('searchEmployee', data)
     },
 
-    async setRole ({ commit, dispatch, state }) {
+    async setRole ({ dispatch, state }) {
       const selectedEmployee = state.selectedEmployee
       const { status } = await this.$axios.post(`employee/role/${selectedEmployee.id}`, {
         id: 5
@@ -48,7 +48,7 @@ const roles = {
         : null
     },
 
-    async removeRole ({ commit, state }, payload) {
+    async removeRole ({ commit }, payload) {
       const { status } = await this.$axios.delete(`employee/role/${payload.id}`)
       return status === 200 ? commit('settingsRemoveRole', payload) : null
     }

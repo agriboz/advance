@@ -1,7 +1,5 @@
-const Vue = require('vue')
-const Toast = Vue.prototype.$toast
-console.log(Toast)
 module.exports = {
+  debug: true,
   /*
   ** Single Page Application mode
   ** Means no SSR
@@ -11,7 +9,7 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: 'advance',
+    title: 'Maaş Avansı',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -33,18 +31,16 @@ module.exports = {
       : 'http://10.10.27.36:8181/adv/v2/'
   },
   axios: {
-    baseURL:
-      process.env.NODE_ENV === 'production'
-        ? 'http://10.10.27.36:8181/adv/v2/'
-        : 'http://10.10.27.36:8181/adv/v1/'
-    /* ,
-    errorHandler (errorReason, { error }) {
-      Vue.prototype.$toast.open({
-        type: 'is-danger',
-        message: errorReason.response.data.message
-      })
-      // error('Request Error: ' + errorReason)
-    } */
+    withCredentials: true,
+    baseURL: process.env.NODE_ENV === 'development' ? 'http://10.10.27.36:8181/adv/v1/' : 'http://10.10.27.36:8181/adv/v2/',
+    requestInterceptor: (config, {store}) => {
+      store.state.loading = true
+      return config
+    },
+    responseInterceptor: (response, {store}) => {
+      store.state.loading = false
+      return response
+    }
   },
   loading: { color: '#3B8070' },
   plugins: ['~/plugins/buefy', '~/plugins/axios', '~/plugins/vuelidate', '~/plugins/excel'],

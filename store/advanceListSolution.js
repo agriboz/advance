@@ -21,7 +21,7 @@ const advanceListSolution = {
     },
 
     makeSearch (state, field) {
-      state.searchQuery = Object.assign(state.searchQuery, field)
+      Object.assign(state.searchQuery, field)
     },
 
     data (state, payload) {
@@ -32,7 +32,7 @@ const advanceListSolution = {
       state.searchQuery = {}
     },
 
-    clearCheckedRows (state) {
+    clearCheckedRows () {
       initialState.advanceList.checkedRows = []
     },
 
@@ -65,7 +65,7 @@ const advanceListSolution = {
       commit('cleanSearchQuery')
     },
 
-    async getEmployeePhoto ({commit, state, getters}, paylaod) {
+    async getEmployeePhoto ({commit}, paylaod) {
       const {
         data
       } = await this.$axios.get(`employee/${paylaod}/photo`)
@@ -94,6 +94,10 @@ const advanceListSolution = {
       getters
     }) {
       const searchQuery = state.searchQuery
+      // workaround date
+      searchQuery.requestStartDate = searchQuery.requestStartDate ? (new Date(searchQuery.requestStartDate).toLocaleDateString()) : null
+      searchQuery.requestEndDate =searchQuery.requestEndDate ? (new Date(searchQuery.requestEndDate).toLocaleDateString()) : null
+
       const sendData = {
         ...searchQuery, employee: { id: getters.employee.id }
       }

@@ -45,7 +45,7 @@ import { mapState } from 'vuex'
 export default {
   methods: {
     closeModal (edit) {
-      this.$store.dispatch('advanceListSolution/openModal', edit)
+      this.$store.dispatch('advanceListSolution/openModal', 'edit')
     },
     editAdvance (field, value) {
       this.$store.commit('editAdvance', {[field]: value})

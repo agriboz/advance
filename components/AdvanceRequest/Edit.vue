@@ -16,7 +16,7 @@
 
         <footer class="modal-card-foot align-end">
           <button :disabled="disabled" class="button is-info">Talep Et</button>
-          <button :disabled="disabled" class="button is-danger" @click="destroyAdvance(data)">İptal Et</button>
+          <a :disabled="disabled" class="button is-danger" @click="destroyAdvance(data)">İptal Et</a>
           <button class="button" type="button" @click="closeModal">Kapat</button>
         </footer>
       </form>
@@ -36,9 +36,9 @@ export default {
     },
 
     async destroyAdvance (payload) {
-      console.log('hey')
       await this.$store.dispatch('destroyAdvance', payload)
       await this.$store.dispatch('advanceRequest')
+      await this.closeModal()
     },
 
     updateAdvance (payload) {

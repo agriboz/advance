@@ -75,7 +75,7 @@
 
                   <span v-if="c.inner === 'currency'">{{data.row[c.inner]['name']}}</span>
                   <!-- <span v-if="data.row[c.field]['name']">{{data.row[c.field]['name']}}</span> -->
-                  <span v-if="c.inner === 'requestDate'">{{new Date(data.row[c.inner]).toLocaleDateString()}}</span>
+                  <span v-if="c.inner === 'requestDate'">{{new Date(data.row[c.inner]).toLocaleDateString('tr-Tr')}}</span>
 
                   <span v-if="c.inner === 'sapSendDate'">
                     <span v-if="data.row[c.inner] !== null">

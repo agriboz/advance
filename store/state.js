@@ -7,9 +7,12 @@ const state = {
     deleted: 9,
     transferError: 11
   },
+  loading: true,
+  canMakeAdvanceRequest: false,
   companies: [],
   advanceStatusList: [],
-  employee: null,
+  employee: {},
+  employeeRoles: [],
   createAdvance: {
     amount: 100,
     amountPercentage: '0'

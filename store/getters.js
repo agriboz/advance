@@ -54,7 +54,6 @@ const getters = {
     } = state.advanceStatus
     return state.advanceRequestManager.data.filter(item => {
       return (
-        console.log(item.status.id),
         item.status.id <= employeeRequested || ownerRequested || transferToSap
       )
     })

@@ -4,8 +4,8 @@
     <div class="columns container is-fluid">
       <Sidebar class="animated" :class="[{['fadeOutLeft hide-sidebar']: openSidebar}, 'fadeInLeft']" />
 
-      <nuxt v-if="employee" class="column main animated" :class="[{['slideInRight']: openSidebar}]" />
-
+      <nuxt class="column main animated" :class="[{['slideInRight']: openSidebar}]" />
+      <b-loading :active.sync="loading" :canCancel="true"></b-loading>
     </div>
   </div>
 </template>
@@ -24,6 +24,7 @@ export default {
 
   computed: {
     ...mapState({
+      loading: state => state.loading,
       employee: state => state.employee,
       openSidebar: state => state.ui.openSidebar
     })
