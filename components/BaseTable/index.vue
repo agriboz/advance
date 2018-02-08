@@ -15,10 +15,24 @@
 
             <template slot-scope="data">
                 <b-table-column v-for="(c,i) in columns" :innerId="c.innerId"  :inner="c.inner" :field="c.field"  :label="c.title"  :key="i">
-                  <span v-if="c.field === 'amountPercentage'">%</span>
-                  {{ data.row[c.field] }}
+                  <span v-if="c.field === 'amountPercentage' && data.row[c.field] === 50">
+                    Evet
+                  </span>
+                  <span v-if="c.field === 'amountPercentage' && data.row[c.field] === 0">
+                    Hayır
+                  </span>
+                  <span v-if="data.row[c.field] !== 50 && data.row[c.field] !== 0">
+                    {{ data.row[c.field] }}
+                  </span>
 
-                  <span v-if="c.field === 'amount'">TL</span>
+                  <span v-if="c.field === 'amount' && data.row[c.field] >= 100">
+                   TL
+                  </span>
+
+                  <span v-if="c.field === 'amount' && data.row[c.field] < 100">
+                   0 TL
+                  </span>
+
 
                   <span v-if="c.inner === 'status'">
                     <span v-if="data.row[c.inner]['id'] === 1">
