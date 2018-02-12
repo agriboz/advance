@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="title is-size-4">Uygulama Ayarları</h1>
+    <h1 class="title is-size-5">Uygulama Ayarları</h1>
     <hr>
     <BaseTable :columns="columns"
                :canEdit="true"

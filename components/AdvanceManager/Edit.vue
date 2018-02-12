@@ -19,12 +19,12 @@
        <b-field style="margin-top:30px" label="%50 Oranında maaşımı avans olarak isteniyor">
           <b-switch :disabled="disabled" :value.sync="data.amountPercentage" @input="editAdvance('amountPercentage', $event)"  true-value="50" false-value="0"></b-switch>
         </b-field>
-        <b-field label="Avans Tutarı">
+        <b-field label="Tutar belirtmek istiyorum">
           <b-input type="number" min="100" :value.sync="data.amount" @input="editAdvance('amount', $event)"  :disabled="$store.getters.disableAmount" placeholder="Avans Tutarı" required></b-input>
         </b-field>
       </section>
       <footer class="modal-card-foot align-end">
-        <button :disabled="disabled" @click="updateAdvance(data)" class="button is-info">Talep Et</button>
+        <button :disabled="disabled" @click="updateAdvance(data)" class="button is-info">Güncelle</button>
         <button :disabled="disabled" class="button is-danger" @click="destroyAdvance(data)">İptal Et</button>
         <button class="button" type="button" @click="closeModal('edit')">Kapat</button>
       </footer>

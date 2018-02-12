@@ -26,12 +26,12 @@
             <b-switch :value="amountPercentage" true-value="50" false-value="0" @input="createAdvance('amountPercentage', $event)"></b-switch>
           </b-field>
 
-          <b-field label="Avans Tutarı">
+          <b-field label="Tutar belirtmek istiyorum">
             <b-input type="number" min="100" :disabled="$store.getters.disableAmount"  @input="createAdvance('amount', $event)" :value="amount" placeholder="Avans Tutarı" required></b-input>
           </b-field>
         </section>
         <footer class="modal-card-foot align-end">
-          <button :disabled="$v.$invalid" type="submit" class="button is-info">Talep Et</button>
+          <button :disabled="$v.$invalid" type="submit" class="button is-info">Güncelle</button>
           <button class="button" @click="closeModal('create')" type="button">Kapat</button>
         </footer>
       </form>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="title is-size-4">Çözüm Merkezi Bordro Yetkilisi Tanımlama</h1>
+    <h1 class="title is-size-5">Çözüm Merkezi Bordro Yetkilisi Tanımlama</h1>
     <hr>
     <div class="content">
       <b-field label="Personel Ara">

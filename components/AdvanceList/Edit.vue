@@ -15,11 +15,11 @@
           </p>
         </b-field>
        </b-field>
-        <b-field style="margin-top:30px" label="%50 Oranında maaşımı avans olarak isteniyor">
+        <b-field style="margin-top:30px" label="%50 Oranında maaş avans olarak isteniyor">
           <b-switch :disabled="data.status.id === 7" :value="data.amountPercentage" @input="editAdvance('amountPercentage', $event)"  true-value="50" false-value="0"></b-switch>
         </b-field>
 
-        <b-field label="Avans Tutarı">
+        <b-field label="Tutar belirtmek istiyorum">
           <b-input type="number" :value="data.amount" @input="editAdvance('amount', $event)"  :disabled="$store.getters.disableAmount || data.status.id === 7" placeholder="Avans Tutarı" required></b-input>
         </b-field>
 

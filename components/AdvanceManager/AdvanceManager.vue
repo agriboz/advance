@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="title is-size-4">Bağlı Çalışan İçin Avans Talepleri</h1>
+    <h1 class="title is-size-5">Bağlı Çalışan İçin Avans Talepleri</h1>
     <hr>
 
     <b-message v-if="!employee.canDemandAdvanceInCurrentDay" type="is-warning" has-icon>

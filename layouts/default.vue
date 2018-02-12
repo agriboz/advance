@@ -1,7 +1,7 @@
 <template>
   <div>
     <AdvanceHeader />
-    <div class="columns container is-fluid">
+    <div class="columns container is-fluid" style="margin-top: 22px">
       <Sidebar class="animated" :class="[{['fadeOutLeft hide-sidebar']: openSidebar}, 'fadeInLeft']" />
 
       <nuxt class="column main animated" :class="[{['slideInRight']: openSidebar}]" />
@@ -36,6 +36,11 @@ export default {
 html {
   background: #f5f5f5;
   height: 100vh;
+}
+
+.is-fluid {
+  margin-left: 20px !important;
+  margin-right: 10px !important;
 }
 
 .sidebar, .main {

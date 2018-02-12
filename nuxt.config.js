@@ -16,12 +16,17 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'Nuxt.js project' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'stylesheet',
         href:
+          'https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext'
+      },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      /* {
+        rel: 'stylesheet',
+        href:
           '//cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css'
-      }
+      } */
     ]
   },
   modules: ['@nuxtjs/axios'],
@@ -44,7 +49,10 @@ module.exports = {
   },
   loading: { color: '#3B8070' },
   plugins: ['~/plugins/buefy', '~/plugins/axios', '~/plugins/vuelidate', '~/plugins/excel'],
-  css: ['animate.css/animate.min.css', 'node_modules/buefy/lib/buefy.min.css'],
+  css: ['animate.css/animate.min.css',
+    'node_modules/buefy/lib/buefy.min.css',
+    '@/assets/style.css',
+    '@/assets/materialdesignicons.min.css'],
   router: {
     linkActiveClass: 'is-active'
   },

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="title is-size-4">Avans Talepleri Listeme</h1>
+    <h1 class="title is-size-5">Avans Talepleri Listeme</h1>
     <hr>
     <b-field grouped>
       <b-field label="Şirket">
@@ -107,7 +107,7 @@ export default {
       endDate: null,
       warning: false,
       columnsTemplate: [
-        { inner: 'status' },
+        { title: 'Talep Durumu', inner: 'status' },
         { title: 'Talep Numarası', field: 'id' },
         { title: 'Sicil Numarası', field: 'registery' },
         { title: 'Personel Adı Soyadı', inner: 'employee' },

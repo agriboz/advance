@@ -4,17 +4,20 @@
         <p class="modal-card-title">Yeni Avans Talep Et</p>
       </header>
       <form @submit.prevent="setAdvance('advance', $store.state.createAdvance)">
+        <b-message type="is-info" has-icon style="margin-bottom:0">
+          Avans olarak talep edebileceğiniz; Maksimum tutar aylık net maaşınızın %50’si kadar, Minimum tutar <strong>100 TL</strong> dir.
+        </b-message>
         <section class="modal-card-body">
         <b-field label="%50 Oranında maaşımı avans olarak istiyorum ">
             <b-switch :value="amountPercentage" true-value="50" false-value="0" @input="createAdvance('amountPercentage', $event)"></b-switch>
           </b-field>
 
-          <b-field label="Avans Tutarı">
+          <b-field label="Tutar belirtmek istiyorum">
             <b-input type="number" min="100" :disabled="$store.getters.disableAmount"  @input="createAdvance('amount', $event)" :value="amount" placeholder="Avans Tutarı" required></b-input>
           </b-field>
         </section>
         <footer class="modal-card-foot align-end">
-          <button type="submit" class="button is-info">Talep Et</button>
+          <button type="submit" class="button is-info">Güncelle</button>
           <button class="button" @click="closeModal('create')" type="button">Kapat</button>
         </footer>
       </form>

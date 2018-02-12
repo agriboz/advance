@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="title is-size-4">Avans Taleplerim</h1>
+    <h1 class="title is-size-5">Avans Taleplerim</h1>
     <hr>
     <b-message v-if="!employee.canDemandAdvance" type="is-info" has-icon>
           İşe girişi tarihiniz, avans talep etmek istediğiniz ay içerisinde olduğu için avans talebi yapamamaktasınız.
@@ -11,7 +11,7 @@
 
     <div class="content is-clearfix" v-if="employee.canDemandAdvance && employee.canDemandAdvanceInCurrentDay">
       <a @click="openModalCreate('create')"
-         class="button is-info is-pulled-right">Yeni Avans Ekle</a>
+         class="button is-success is-pulled-right">Yeni Avans Talep Et</a>
     </div>
 
     <BaseTable :columns="columnsTemplate" v-if="advanceRequestList" :canEdit="true" :edit="edit" :data="advanceRequestList"></BaseTable>
@@ -37,7 +37,7 @@ export default {
       columnsTemplate: [
         { title: 'Talep Durumu', inner: 'status' },
         { title: 'Avans Tutarı', field: 'amount' },
-        { title: '%50 mi', field: 'amountPercentage' },
+        { title: 'Avans Maaş Yüzdesi', field: 'amountPercentage' },
         { title: 'Talep Tarihi', inner: 'requestDate' }
       ]
     }

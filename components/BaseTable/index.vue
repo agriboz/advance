@@ -30,55 +30,60 @@
                   </span>
 
                   <span v-if="c.field === 'amount' && data.row[c.field] < 100">
-                   0 TL
+                   -
                   </span>
 
 
                   <span v-if="c.inner === 'status'">
                     <span v-if="data.row[c.inner]['id'] === 1">
-                      <b-tooltip label="Değerlendiriliyor">
+                      Değerlendiriliyor
+                      <!-- <b-tooltip label="Değerlendiriliyor">
                         <b-icon
                           type="is-info"
                           icon="timer"
                           size="is-medium">
                         </b-icon>
-                      </b-tooltip>
+                      </b-tooltip> -->
                     </span>
                     <span v-if="data.row[c.inner]['id'] === 3">
-                      <b-tooltip label="Talep Edildi">
+                      Talep Edildi
+                      <!-- <b-tooltip label="Talep Edildi">
                         <b-icon
                           type="is-info"
                           icon="timer"
                           size="is-medium">
                         </b-icon>
-                      </b-tooltip>
+                      </b-tooltip> -->
                     </span>
                     <span v-if="data.row[c.inner]['id'] === 11">
-                      <b-tooltip label="SAP Transfer Hatası">
+                      SAP Transfer Hatası
+                      <!-- <b-tooltip label="SAP Transfer Hatası">
                         <b-icon
                           type="is-warning"
                           icon="alert-circle-outline"
                           size="is-medium">
                         </b-icon>
-                      </b-tooltip>
+                      </b-tooltip> -->
                     </span>
                     <span v-if="data.row[c.inner]['id'] === 5">
-                      <b-tooltip label="Avans Talebiniz Alındı">
+                      Avans Talebiniz Alındı
+                      <!-- <b-tooltip label="Avans Talebiniz Alındı">
                         <b-icon
                             type="is-success"
                             icon="checkbox-marked-circle-outline"
                             size="is-medium">
                         </b-icon>
-                      </b-tooltip>
+                      </b-tooltip> -->
                     </span>
                       <span v-if="data.row[c.inner]['id'] === 7">
-                        <b-tooltip label="İptal Edildi">
+                        İptal Edildi
+                        <!-- <b-tooltip label="İptal Edildi">
                           <b-icon
                             type="is-danger"
                             icon="close-circle"
                             size="is-medium">
                           </b-icon>
-                        </b-tooltip>
+                        </b-tooltip> -->
                       </span>
                     </span>
 
@@ -99,7 +104,7 @@
 
                 </b-table-column>
                 <b-table-column>
-                  <button v-if="canEdit" @click="edit(data.row)" class="button field is-info">Detay</button>
+                  <button v-if="canEdit" @click="edit(data.row)" class="button field is-info">Değiştir/İptal Et</button>
                   <button v-if="canDelete" @click="destroy(data.row)" class="button field is-danger">Sil</button>
                 </b-table-column>
             </template>
