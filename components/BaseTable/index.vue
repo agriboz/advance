@@ -16,10 +16,10 @@
             <template slot-scope="data">
                 <b-table-column v-for="(c,i) in columns" :innerId="c.innerId"  :inner="c.inner" :field="c.field"  :label="c.title"  :key="i">
                   <span v-if="c.field === 'amountPercentage' && data.row[c.field] === 50">
-                    Evet
+                    %50
                   </span>
                   <span v-if="c.field === 'amountPercentage' && data.row[c.field] === 0">
-                    Hayır
+                    -
                   </span>
                   <span v-if="data.row[c.field] !== 50 && data.row[c.field] !== 0">
                     {{ data.row[c.field] }}

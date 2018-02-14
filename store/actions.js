@@ -5,10 +5,10 @@ const actions = {
   async browserInit ({ commit }) {
     const {
       data
-    } = await axios.get(`${process.env.baseUrl}employee`, {
+    } = await axios.get(`${process.env.baseURL}employee`, {
       withCredentials: true
     })
-
+    console.log(process.env.baseURL)
     commit('employee', data)
     commit('employeeRoles', values(data.roles))
   },

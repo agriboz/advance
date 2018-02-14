@@ -1,5 +1,4 @@
 import includes from 'lodash/includes'
-// sadece 5 varsa görmeyecek
 const getters = {
   menu (state) {
     const employeeRoles = state.employeeRoles

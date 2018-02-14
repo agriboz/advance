@@ -31,13 +31,17 @@ module.exports = {
   },
   modules: ['@nuxtjs/axios'],
   env: {
-    baseUrl: process.env.NODE_ENV === 'development'
+    baseURL: process.env.NODE_ENV === 'development'
       ? 'http://10.10.27.36:8181/adv/v1/'
-      : 'http://10.10.27.36:8181/adv/v2/'
+      : process.env.NODE_ENV === 'production' ? 'http://api.borusan.com/ADV/v1/'
+        : process.env.NODE_ENV === 'UAT' ? 'http://10.10.27.36:8181/adv/v2/' : null,
   },
   axios: {
     withCredentials: true,
-    baseURL: process.env.NODE_ENV === 'development' ? 'http://10.10.27.36:8181/adv/v1/' : 'http://10.10.27.36:8181/adv/v2/',
+    baseURL: process.env.NODE_ENV === 'development'
+      ? 'http://10.10.27.36:8181/adv/v1/'
+        : process.env.NODE_ENV === 'production' ? 'http://api.borusan.com/ADV/v1/'
+          : process.env.NODE_ENV === 'UAT' ? 'http://10.10.27.36:8181/adv/v2/' : null,
     requestInterceptor: (config, {store}) => {
       store.state.loading = true
       return config

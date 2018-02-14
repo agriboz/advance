@@ -31,7 +31,7 @@
           </b-field>
         </section>
         <footer class="modal-card-foot align-end">
-          <button :disabled="$v.$invalid" type="submit" class="button is-info">Güncelle</button>
+          <button :disabled="$v.$invalid" type="submit" class="button is-info">Talep Et</button>
           <button class="button" @click="closeModal('create')" type="button">Kapat</button>
         </footer>
       </form>
